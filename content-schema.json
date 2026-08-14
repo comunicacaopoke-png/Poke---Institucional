@@ -1,0 +1,30 @@
+{
+  "site": {
+    "name": "POKE",
+    "seo_title": "POKE — Comunicação, Design e Tecnologia",
+    "seo_description": "A POKE cria marcas, experiências, sites, sistemas e produtos digitais combinando comunicação, design e tecnologia.",
+    "canonical_url": "https://seudominio.com.br/",
+    "instagram_url": "",
+    "linkedin_url": "",
+    "email": "contato@seudominio.com.br",
+    "city": "Curitiba",
+    "state": "PR"
+  },
+  "home": {
+    "hero_eyebrow": "Comunicação · Design · Tecnologia",
+    "hero_title_line_1": "We build",
+    "hero_title_line_2": "movement.",
+    "hero_text": "Estratégia, design e tecnologia para transformar ideias, processos e problemas reais em soluções que funcionam.",
+    "hero_image_url": "",
+    "intro_title": "Não somos só agência. Nem só tecnologia.",
+    "intro_text": "",
+    "manifesto_title": "Antes de construir, a gente cutuca.",
+    "manifesto_text": "",
+    "cta_title": "Tem alguma coisa que poderia funcionar melhor?",
+    "cta_text": ""
+  },
+  "services": [],
+  "products": [],
+  "projects": [],
+  "articles": []
+}
