@@ -45,6 +45,21 @@
     }
     const form = document.querySelector('[data-contact-form]');
     if (form && site.contactFormEndpoint) form.dataset.endpoint = site.contactFormEndpoint;
+    const newsletter = document.querySelector('[data-newsletter-form]');
+    if (newsletter && site.contactFormEndpoint) newsletter.dataset.endpoint = site.contactFormEndpoint;
+
+    // WhatsApp: os links só aparecem depois que um número for preenchido no painel.
+    const digits = String(site.whatsapp || '').replace(/\D/g, '');
+    const number = digits && (digits.startsWith('55') ? digits : `55${digits}`);
+    if (number && number.length >= 12) {
+      const message = encodeURIComponent('Olá! Vim pelo site da POKE e quero conversar sobre um projeto.');
+      document.querySelectorAll('[data-whatsapp-link]').forEach(anchor => {
+        anchor.href = `https://wa.me/${number}?text=${message}`;
+        anchor.target = '_blank';
+        anchor.rel = 'noopener';
+        anchor.hidden = false;
+      });
+    }
     if (site.gaMeasurementId) document.querySelector('meta[name="google-analytics-id"]')?.setAttribute('content', site.gaMeasurementId);
   };
 

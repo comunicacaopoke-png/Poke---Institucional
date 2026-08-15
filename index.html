@@ -225,23 +225,11 @@
     "address":{"@type":"PostalAddress","addressLocality":"Curitiba","addressRegion":"PR","addressCountry":"BR"}
   }
   </script>
+  <link rel="stylesheet" href="/assets/chrome.css">
 </head>
 <body>
-<header class="site-header" id="header">
-  <div class="shell nav">
-    <a href="/" class="brand" aria-label="POKE — página inicial"><img src="assets/poke-logo-oficial.png" alt="POKE" /></a>
-    <nav class="nav-links" id="menu" aria-label="Navegação principal">
-      <a href="/a-poke/">A POKE</a>
-      <a href="/solucoes/">Soluções</a>
-      <a href="/produtos/">Produtos</a>
-      <a href="/projetos/">Projetos</a>
-      <a href="/insights/">Insights</a>
-      <a href="/contato/">Contato</a>
-    </nav>
-    <a class="nav-cta" href="/contato/">Comece um projeto <span>↗</span></a>
-    <button class="menu-btn" id="menuButton" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu">MENU</button>
-  </div>
-</header>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+<header class="site-header" id="header"><div class="shell nav"><a href="/" class="brand" aria-label="POKE — página inicial"><img src="/assets/poke-logo-oficial.png" alt="POKE"></a><nav class="nav-links" id="menu" data-menu aria-label="Navegação principal"><a href="/" aria-current="page">Home</a><a href="/a-poke/">Sobre nós</a><a href="/solucoes/">Soluções</a><a href="/produtos/">Produtos</a><a href="/projetos/">Projetos</a><a href="/insights/">Insights</a><a href="/contato/">Contato</a></nav><a class="nav-cta" href="/contato/">Comece um projeto <span>↗</span></a><button class="menu-btn" type="button" data-menu-button aria-expanded="false" aria-controls="menu">MENU</button></div></header>
 
 <main>
   <section class="hero" id="hero">
@@ -382,21 +370,30 @@
     </div>
   </section>
 
-  <section class="cta">
-    <div class="shell reveal"><span class="eyebrow">Vamos conversar</span><h2>Tem alguma coisa<br>que poderia<br><span>funcionar melhor?</span></h2><p>Uma marca. Um site. Um processo. Uma plataforma. Uma ideia. Conte para a gente onde está o atrito.</p><div style="margin-top:30px"><a class="nav-cta" href="/contato/">Fale com a gente <span>↗</span></a></div></div>
+  <section class="newsletter" id="newsletter" aria-labelledby="newsletter-titulo">
+      <div class="shell newsletter__inner">
+        <div class="newsletter__copy">
+          <span class="eyebrow">Newsletter</span>
+          <h2 id="newsletter-titulo">Receba o que a gente escreve.</h2>
+          <p>Insights, bastidores de projeto e as revistas digitais que estamos preparando. Chega só quando tem algo que vale a sua leitura.</p>
+        </div>
+        <form class="newsletter__form" data-newsletter-form novalidate>
+          <div class="newsletter__field">
+            <label for="newsletter-email">Seu e-mail</label>
+            <input id="newsletter-email" name="email" type="email" autocomplete="email" placeholder="voce@empresa.com.br" required>
+          </div>
+          <button type="submit">Quero receber</button>
+          <p class="newsletter__status" data-form-status aria-live="polite"></p>
+          <p class="newsletter__note">Sem spam. Você sai quando quiser.</p>
+        </form>
+      </div>
+    </section>
+    <section class="cta">
+    <div class="shell reveal"><span class="eyebrow">Vamos conversar</span><h2>Tem alguma coisa<br>que poderia<br><span>funcionar melhor?</span></h2><p>Uma marca. Um site. Um processo. Uma plataforma. Uma ideia. Conte para a gente onde está o atrito.</p><div class="cta-actions"><a class="nav-cta" href="/contato/">Fale com a gente <span>↗</span></a><a class="button--whatsapp" data-whatsapp-link href="/contato/" hidden>Chamar no WhatsApp</a></div></div>
   </section>
 </main>
 
-<footer>
-  <div class="shell">
-    <div class="footer-grid">
-      <div><img src="assets/poke-logo-oficial.png" alt="POKE" /><p>Comunicação, design e tecnologia.<br>Curitiba — PR / Brasil.</p></div>
-      <div><h4>Navegação</h4><div class="footer-links"><a href="/a-poke/">A POKE</a><a href="/solucoes/">Soluções</a><a href="/produtos/">Produtos</a><a href="/projetos/">Projetos</a><a href="/insights/">Insights</a><a href="/contato/">Contato</a></div></div>
-      <div><h4>Social</h4><div class="footer-links"><a href="#">Instagram ↗</a><a href="#">LinkedIn ↗</a><a href="mailto:contato@seudominio.com.br">E-mail ↗</a></div></div>
-    </div>
-    <div class="footer-bottom"><span>© POKE 2026</span><span>WE BUILD MOVEMENT.</span><span>Privacidade · Termos</span></div>
-  </div>
-</footer>
+<footer class="footer"><div class="shell"><div class="footer-top"><div class="footer-cols"><div class="footer-col"><h2>Navegação</h2><nav class="footer-nav"><a href="/">Home</a><a href="/a-poke/">Sobre nós</a><a href="/solucoes/">Soluções</a><a href="/produtos/">Produtos</a><a href="/projetos/">Projetos</a><a href="/insights/">Insights</a><a href="/contato/">Contato</a></nav></div><div class="footer-col"><h2>Soluções</h2><nav class="footer-nav"><a href="/solucoes/produtos-digitais/">Produtos digitais</a><a href="/solucoes/sites/">Sites e experiências</a><a href="/solucoes/sistemas-automacoes/">Sistemas e automações</a><a href="/solucoes/branding/">Marca e identidade</a><a href="/solucoes/comunicacao/">Comunicação</a></nav></div><div class="footer-col"><h2>Contato</h2><nav class="footer-nav"><a href="mailto:contato@pokecomunicacao.com.br">contato@pokecomunicacao.com.br</a><a href="/contato/" data-whatsapp-link hidden>WhatsApp</a><a href="https://instagram.com/" target="_blank" rel="noopener">Instagram ↗</a><a href="https://linkedin.com/" target="_blank" rel="noopener">LinkedIn ↗</a></nav><p>Curitiba — PR / Brasil</p></div></div><div class="footer-mark"><img src="/assets/poke-p-oficial.png" alt="POKE" width="2048" height="2048" loading="lazy"></div></div><div class="footer-bottom"><span>POKE © 2026</span><span>We build movement.</span><a href="/privacidade/">Privacidade</a></div></div></footer>
 
 <script>
   const header=document.getElementById('header');
