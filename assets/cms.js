@@ -45,6 +45,8 @@
     }
     const form = document.querySelector('[data-contact-form]');
     if (form && site.contactFormEndpoint) form.dataset.endpoint = site.contactFormEndpoint;
+    const newsletter = document.querySelector('[data-newsletter-form]');
+    if (newsletter && site.newsletterEndpoint) newsletter.dataset.endpoint = site.newsletterEndpoint;
     if (site.gaMeasurementId) document.querySelector('meta[name="google-analytics-id"]')?.setAttribute('content', site.gaMeasurementId);
   };
 

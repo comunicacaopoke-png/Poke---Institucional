@@ -207,11 +207,19 @@
   window.pokeTrack = (eventName, params = {}) => {
     if (typeof window.gtag === 'function') window.gtag('event', eventName, params);
   };
+  const analyticsSlug = value => String(value || 'acao')
+    .toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '').slice(0, 32) || 'acao';
   document.querySelectorAll('[data-track]').forEach(element => {
-    element.addEventListener('click', () => window.pokeTrack(element.dataset.track, {
-      link_url: element.href || undefined,
-      link_text: element.textContent.trim()
-    }));
+    element.addEventListener('click', () => {
+      if (element.closest('[data-contact-form]')) return;
+      const label = element.textContent.trim() || element.getAttribute('aria-label') || element.href || element.dataset.track;
+      window.pokeTrack(`poke_cta_${analyticsSlug(label)}`, {
+        content_type: element.dataset.track,
+        link_url: element.href || undefined,
+        link_text: label
+      });
+    });
   });
 
   let consentVisible = false;
@@ -238,38 +246,50 @@
   showAnalyticsConsent();
   window.addEventListener('poke:content-ready', showAnalyticsConsent);
 
-  const contactForm = document.querySelector('[data-contact-form]');
-  if (contactForm) {
-    const status = contactForm.querySelector('[data-form-status]');
-    contactForm.addEventListener('submit', async event => {
+  const setupPublicForm = (form, options) => {
+    if (!form) return;
+    const status = form.querySelector('[data-form-status]');
+    const submit = form.querySelector('[type="submit"]');
+    const idleLabel = submit?.textContent || 'ENVIAR';
+    form.addEventListener('submit', async event => {
       event.preventDefault();
-      if (!contactForm.checkValidity()) return contactForm.reportValidity();
-      const endpoint = contactForm.dataset.endpoint;
-      const payload = Object.fromEntries(new FormData(contactForm).entries());
+      if (!form.checkValidity()) return form.reportValidity();
+      const endpoint = form.dataset.endpoint;
+      const payload = Object.fromEntries(new FormData(form).entries());
+      payload.type = options.type;
+      payload.source = 'site';
       payload.page_url = window.location.href;
       payload.submitted_at = new Date().toISOString();
-      const submit = contactForm.querySelector('[type="submit"]');
       if (!endpoint) {
-        status.innerHTML = 'O envio ainda não foi configurado. Escreva para <a href="mailto:contato@seudominio.com.br">contato@seudominio.com.br</a>.';
+        status.textContent = 'O envio ainda está sendo configurado. Tente novamente em alguns instantes.';
         return;
       }
       submit.disabled = true;
-      submit.textContent = 'ENVIANDO…';
+      submit.textContent = options.loading;
       try {
-        const response = await fetch(endpoint, {
+        await fetch(endpoint, {
           method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify(payload)
+          body: JSON.stringify(payload), mode: 'no-cors'
         });
-        if (!response.ok) throw new Error('Falha ao enviar');
-        status.textContent = 'Recebemos sua mensagem. A gente continua daqui.';
-        contactForm.reset();
-        window.pokeTrack('generate_lead', { form_name: 'contato' });
+        status.textContent = options.success;
+        form.reset();
+        window.pokeTrack(options.event, { form_name: options.type });
       } catch (error) {
-        status.textContent = 'Não foi possível enviar agora. Tente novamente ou fale conosco por e-mail.';
+        status.textContent = options.failure;
       } finally {
         submit.disabled = false;
-        submit.textContent = 'ENVIAR MENSAGEM →';
+        submit.textContent = idleLabel;
       }
     });
-  }
+  };
+  setupPublicForm(document.querySelector('[data-contact-form]'), {
+    type: 'contact', event: 'generate_lead', loading: 'ENVIANDO…',
+    success: 'Recebemos sua mensagem. A gente continua daqui.',
+    failure: 'Não foi possível enviar agora. Tente novamente ou fale conosco por e-mail.'
+  });
+  setupPublicForm(document.querySelector('[data-newsletter-form]'), {
+    type: 'newsletter', event: 'sign_up', loading: 'CADASTRANDO…',
+    success: 'Pronto. Você vai receber as próximas leituras da POKE.',
+    failure: 'Não foi possível fazer o cadastro agora. Tente novamente em instantes.'
+  });
 })();
