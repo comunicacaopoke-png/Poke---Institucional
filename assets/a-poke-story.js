@@ -1,6 +1,6 @@
 (() => {
   const story = document.querySelector('[data-poke-story]');
-  if (!story || window.matchMedia('(max-width: 850px), (prefers-reduced-motion: reduce)').matches) return;
+  if (!story || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   const clamp = value => Math.min(1, Math.max(0, value));
   const between = (value, start, end) => clamp((value - start) / (end - start));
@@ -8,6 +8,18 @@
   const progressFor = element => {
     const travel = Math.max(element.offsetHeight - window.innerHeight, 1);
     return clamp(-element.getBoundingClientRect().top / travel);
+  };
+  // No mobile os princípios ficam em fluxo normal (quatro blocos não cabem numa
+  // tela). Aí cada bloco entra pela própria posição, em vez do progresso da seção.
+  const isPinned = section => {
+    const pin = section.firstElementChild;
+    return Boolean(pin) && getComputedStyle(pin).position === 'sticky';
+  };
+  const entranceFor = element => {
+    const top = element.getBoundingClientRect().top;
+    const start = window.innerHeight * .92;
+    const end = window.innerHeight * .42;
+    return clamp((start - top) / (start - end));
   };
 
   const heroTitle = story.querySelector('.poke-story__title');
@@ -43,6 +55,17 @@
 
   const renderPrinciples = () => {
     if (!principles || !principlesHeading) return;
+    if (!isPinned(principles)) {
+      const headingProgress = smooth(entranceFor(principlesHeading));
+      principlesHeading.style.opacity = String(headingProgress);
+      principlesHeading.style.transform = `translate3d(0, ${44 * (1 - headingProgress)}px, 0)`;
+      principleItems.forEach(item => {
+        const itemProgress = smooth(entranceFor(item));
+        item.style.opacity = String(itemProgress);
+        item.style.transform = `translate3d(0, ${62 * (1 - itemProgress)}px, 0)`;
+      });
+      return;
+    }
     const progress = progressFor(principles);
     const headingProgress = smooth(between(progress, 0, .42));
     principlesHeading.style.opacity = String(1 - headingProgress * .25);
