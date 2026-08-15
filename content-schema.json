@@ -1,30 +1,20 @@
 {
-  "site": {
-    "name": "POKE",
-    "seo_title": "POKE — Comunicação, Design e Tecnologia",
-    "seo_description": "A POKE cria marcas, experiências, sites, sistemas e produtos digitais combinando comunicação, design e tecnologia.",
-    "canonical_url": "https://seudominio.com.br/",
-    "instagram_url": "",
-    "linkedin_url": "",
-    "email": "contato@seudominio.com.br",
-    "city": "Curitiba",
-    "state": "PR"
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "POKE content contract",
+  "description": "Contrato poke-content/v1 entre o painel Apps Script e o build estático publicado no GitHub Pages.",
+  "type": "object",
+  "required": ["version", "site", "home", "solutions", "products", "projects", "articles"],
+  "properties": {
+    "version": { "const": 1 },
+    "site": { "type": "object", "required": ["name", "siteUrl", "email", "seoTitle", "seoDescription"], "properties": { "name": { "type": "string" }, "siteUrl": { "type": "string", "format": "uri" }, "email": { "type": "string", "format": "email" }, "phone": { "type": "string" }, "whatsapp": { "type": "string" }, "instagramUrl": { "type": "string" }, "linkedinUrl": { "type": "string" }, "city": { "type": "string" }, "state": { "type": "string" }, "seoTitle": { "type": "string", "maxLength": 70 }, "seoDescription": { "type": "string", "maxLength": 170 }, "defaultOgImage": { "type": "string" }, "gaMeasurementId": { "type": "string", "pattern": "^$|^G-[A-Z0-9]+$" } }, "additionalProperties": false },
+    "home": { "type": "object", "properties": { "heroEyebrow": { "type": "string" }, "heroTitleLine1": { "type": "string" }, "heroTitleLine2": { "type": "string" }, "heroText": { "type": "string" }, "heroPrimaryCtaLabel": { "type": "string" }, "heroPrimaryCtaUrl": { "type": "string" }, "heroSecondaryCtaLabel": { "type": "string" }, "heroSecondaryCtaUrl": { "type": "string" }, "ctaTitle": { "type": "string" }, "ctaText": { "type": "string" } }, "additionalProperties": false },
+    "solutions": { "type": "array", "items": { "$ref": "#/$defs/solution" } }, "products": { "type": "array", "items": { "$ref": "#/$defs/product" } }, "projects": { "type": "array", "items": { "$ref": "#/$defs/project" } }, "articles": { "type": "array", "items": { "$ref": "#/$defs/article" } }
   },
-  "home": {
-    "hero_eyebrow": "Comunicação · Design · Tecnologia",
-    "hero_title_line_1": "We build",
-    "hero_title_line_2": "movement.",
-    "hero_text": "Estratégia, design e tecnologia para transformar ideias, processos e problemas reais em soluções que funcionam.",
-    "hero_image_url": "",
-    "intro_title": "Não somos só agência. Nem só tecnologia.",
-    "intro_text": "",
-    "manifesto_title": "Antes de construir, a gente cutuca.",
-    "manifesto_text": "",
-    "cta_title": "Tem alguma coisa que poderia funcionar melhor?",
-    "cta_text": ""
-  },
-  "services": [],
-  "products": [],
-  "projects": [],
-  "articles": []
+  "$defs": {
+    "slug": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" }, "status": { "type": "string", "enum": ["draft", "published", "archived"] },
+    "solution": { "type": "object", "required": ["title", "slug", "status"], "properties": { "title": { "type": "string" }, "slug": { "$ref": "#/$defs/slug" }, "summary": { "type": "string" }, "content": { "type": "string" }, "imageUrl": { "type": "string" }, "seoTitle": { "type": "string" }, "seoDescription": { "type": "string" }, "ogImage": { "type": "string" }, "order": { "type": "number" }, "status": { "$ref": "#/$defs/status" } }, "additionalProperties": false },
+    "product": { "type": "object", "required": ["name", "slug", "status"], "properties": { "name": { "type": "string" }, "slug": { "$ref": "#/$defs/slug" }, "headline": { "type": "string" }, "description": { "type": "string" }, "color": { "type": "string" }, "imageUrl": { "type": "string" }, "externalUrl": { "type": "string" }, "seoTitle": { "type": "string" }, "seoDescription": { "type": "string" }, "ogImage": { "type": "string" }, "order": { "type": "number" }, "status": { "$ref": "#/$defs/status" } }, "additionalProperties": false },
+    "project": { "type": "object", "required": ["name", "slug", "status"], "properties": { "client": { "type": "string" }, "name": { "type": "string" }, "slug": { "$ref": "#/$defs/slug" }, "year": { "type": "string" }, "categories": { "type": "string" }, "services": { "type": "string" }, "heroImage": { "type": "string" }, "challenge": { "type": "string" }, "idea": { "type": "string" }, "solution": { "type": "string" }, "result": { "type": "string" }, "gallery": { "type": "string" }, "videos": { "type": "string" }, "featured": { "type": ["boolean", "string"] }, "seoTitle": { "type": "string" }, "seoDescription": { "type": "string" }, "ogImage": { "type": "string" }, "status": { "$ref": "#/$defs/status" } }, "additionalProperties": false },
+    "article": { "type": "object", "required": ["title", "slug", "status"], "properties": { "title": { "type": "string" }, "slug": { "$ref": "#/$defs/slug" }, "category": { "type": "string" }, "author": { "type": "string" }, "summary": { "type": "string" }, "content": { "type": "string" }, "imageUrl": { "type": "string" }, "publishedAt": { "type": "string" }, "updatedAt": { "type": "string" }, "featured": { "type": ["boolean", "string"] }, "seoTitle": { "type": "string" }, "seoDescription": { "type": "string" }, "ogImage": { "type": "string" }, "status": { "$ref": "#/$defs/status" } }, "additionalProperties": false }
+  }, "additionalProperties": false
 }
