@@ -1,5 +1,7 @@
 (() => {
-  const contentUrl = '/assets/content.json';
+  const repositoryBase = window.location.pathname.startsWith('/Poke---Institucional/') ? '/Poke---Institucional' : '';
+  const sitePath = url => String(url || '').startsWith('/') ? `${repositoryBase}${url}` : url;
+  const contentUrl = sitePath('/assets/content.json');
   const published = items => (Array.isArray(items) ? items : []).filter(item => item.status === 'published');
   const text = (value, fallback = '') => String(value || fallback);
   const element = (name, className, value) => {
@@ -11,7 +13,7 @@
   const link = (url, className) => {
     const node = document.createElement('a');
     node.className = className;
-    node.href = url || '/contato/';
+    node.href = sitePath(url || '/contato/');
     return node;
   };
   const image = (url, alt) => {
@@ -68,7 +70,7 @@
       document.querySelectorAll('[data-cms-ping-name]').forEach(node => { node.textContent = ping.name; });
       document.querySelectorAll('[data-cms-ping-headline]').forEach(node => { node.textContent = ping.headline; });
       document.querySelectorAll('[data-cms-ping-description]').forEach(node => { node.textContent = ping.description; });
-      document.querySelectorAll('[data-cms-ping-link]').forEach(node => { node.href = ping.externalUrl || '/produtos/ping/'; });
+      document.querySelectorAll('[data-cms-ping-link]').forEach(node => { node.href = sitePath(ping.externalUrl || '/produtos/ping/'); });
     }
     const target = document.querySelector('[data-cms-products]');
     const items = published(products).filter(product => product.slug !== 'ping');
