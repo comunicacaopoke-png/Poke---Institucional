@@ -55,6 +55,50 @@
   });
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReducedMotion) {
+    maskedHeadings.forEach(heading => {
+      let pointerX = 0;
+      let pointerY = 0;
+      let scrollY = 0;
+      let currentX = 0;
+      let currentY = 0;
+      let currentScrollY = 0;
+      let frame = 0;
+
+      const render = () => {
+        frame = 0;
+        currentX += (pointerX - currentX) * .12;
+        currentY += (pointerY - currentY) * .12;
+        currentScrollY += (scrollY - currentScrollY) * .08;
+        heading.style.setProperty('--mask-pointer-x', `${currentX.toFixed(2)}%`);
+        heading.style.setProperty('--mask-pointer-y', `${currentY.toFixed(2)}%`);
+        heading.style.setProperty('--mask-scroll-y', `${currentScrollY.toFixed(2)}%`);
+        if (Math.abs(pointerX - currentX) > .03 || Math.abs(pointerY - currentY) > .03 || Math.abs(scrollY - currentScrollY) > .03) frame = requestAnimationFrame(render);
+      };
+      const requestRender = () => { if (!frame) frame = requestAnimationFrame(render); };
+      const updateScroll = () => {
+        const rect = heading.getBoundingClientRect();
+        const center = rect.top + rect.height * .5;
+        scrollY = ((window.innerHeight * .5 - center) / window.innerHeight) * 9;
+        requestRender();
+      };
+
+      heading.addEventListener('pointermove', event => {
+        if (event.pointerType && event.pointerType !== 'mouse') return;
+        const rect = heading.getBoundingClientRect();
+        pointerX = ((event.clientX - rect.left) / rect.width - .5) * 12;
+        pointerY = ((event.clientY - rect.top) / rect.height - .5) * 8;
+        requestRender();
+      });
+      heading.addEventListener('pointerleave', () => {
+        pointerX = 0;
+        pointerY = 0;
+        requestRender();
+      });
+      window.addEventListener('scroll', updateScroll, { passive: true });
+      updateScroll();
+    });
+  }
   const mainContent = document.querySelector('main');
   const firstContentBlock = mainContent?.firstElementChild;
   const isHomeHero = firstContentBlock?.classList.contains('hero');
