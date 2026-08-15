@@ -1,0 +1,137 @@
+{
+  "version": 1,
+  "updatedAt": "",
+  "site": {
+    "name": "POKE",
+    "siteUrl": "https://comunicacaopoke-png.github.io/Poke---Institucional/",
+    "email": "contato@seudominio.com.br",
+    "phone": "",
+    "whatsapp": "",
+    "instagramUrl": "https://instagram.com/",
+    "linkedinUrl": "https://linkedin.com/",
+    "city": "Curitiba",
+    "state": "PR",
+    "seoTitle": "POKE — Comunicação, Design e Tecnologia",
+    "seoDescription": "Estratégia, design e tecnologia para transformar problemas reais em movimento.",
+    "defaultOgImage": "",
+    "gaMeasurementId": "",
+    "contactFormEndpoint": ""
+  },
+  "home": {
+    "heroEyebrow": "Comunicação · Design · Tecnologia",
+    "heroTitleLine1": "We build",
+    "heroTitleLine2": "movement.",
+    "heroText": "Estratégia, design e tecnologia para transformar ideias, processos e problemas reais em soluções que funcionam.",
+    "heroPrimaryCtaLabel": "Ver projetos",
+    "heroPrimaryCtaUrl": "/projetos/",
+    "heroSecondaryCtaLabel": "Conhecer a POKE",
+    "heroSecondaryCtaUrl": "/a-poke/",
+    "ctaTitle": "",
+    "ctaText": ""
+  },
+  "solutions": [],
+  "products": [
+    {
+      "name": "PING",
+      "slug": "ping",
+      "headline": "O que importa, no momento certo.",
+      "description": "Um jeito simples de criar lembretes e checklists sem transformar cada pequena tarefa em um projeto.",
+      "imageUrl": "",
+      "externalUrl": "/produtos/ping/",
+      "order": 1,
+      "status": "published"
+    }
+  ],
+  "projects": [
+    {
+      "client": "",
+      "name": "Projeto / cliente 01",
+      "slug": "projeto-01",
+      "year": "2026",
+      "categories": "produtos sistemas",
+      "services": "Produto digital · UX/UI · Tecnologia",
+      "heroImage": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1800&q=86",
+      "url": "/projetos/projeto-01/",
+      "challenge": "",
+      "idea": "",
+      "solution": "",
+      "result": "",
+      "gallery": "",
+      "videos": "",
+      "featured": true,
+      "status": "published"
+    },
+    {
+      "client": "",
+      "name": "Projeto / cliente 02",
+      "slug": "projeto-02",
+      "year": "2026",
+      "categories": "sites branding",
+      "services": "Website · Estratégia · Design",
+      "heroImage": "https://images.unsplash.com/photo-1558655146-9f40138edfeb?auto=format&fit=crop&w=1600&q=86",
+      "url": "/projetos/projeto-02/",
+      "challenge": "",
+      "idea": "",
+      "solution": "",
+      "result": "",
+      "gallery": "",
+      "videos": "",
+      "featured": false,
+      "status": "published"
+    }
+  ],
+  "articles": [
+    {
+      "title": "Por que todo processo ruim acaba virando uma planilha?",
+      "slug": "processo-ruim-planilha",
+      "category": "Processos / Tecnologia",
+      "author": "POKE",
+      "summary": "Planilhas não são vilãs. O problema começa quando elas passam a esconder uma operação que precisa de clareza, responsabilidade e fluxo.",
+      "content": "",
+      "imageUrl": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1800&q=86",
+      "url": "/insights/processo-ruim-planilha/",
+      "publishedAt": "",
+      "featured": true,
+      "status": "published"
+    },
+    {
+      "title": "Sua empresa precisa mesmo de outro software?",
+      "slug": "precisa-de-outro-software",
+      "category": "Produto",
+      "author": "POKE",
+      "summary": "",
+      "content": "",
+      "imageUrl": "",
+      "url": "/insights/precisa-de-outro-software/",
+      "publishedAt": "",
+      "featured": false,
+      "status": "published"
+    },
+    {
+      "title": "O problema não é a tecnologia. É o atrito.",
+      "slug": "atrito-digital",
+      "category": "Tecnologia",
+      "author": "POKE",
+      "summary": "",
+      "content": "",
+      "imageUrl": "",
+      "url": "/insights/atrito-digital/",
+      "publishedAt": "",
+      "featured": false,
+      "status": "published"
+    },
+    {
+      "title": "Seu site é bonito. Mas alguém encontra ele?",
+      "slug": "site-bonito-quem-encontra",
+      "category": "SEO / Design",
+      "author": "POKE",
+      "summary": "",
+      "content": "",
+      "imageUrl": "",
+      "url": "/insights/site-bonito-quem-encontra/",
+      "publishedAt": "",
+      "featured": false,
+      "status": "published"
+    }
+  ]
+}

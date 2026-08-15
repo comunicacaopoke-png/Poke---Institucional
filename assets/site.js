@@ -23,7 +23,6 @@
   });
 
   const filters = document.querySelectorAll('[data-project-filter]');
-  const projects = document.querySelectorAll('[data-project-category]');
   filters.forEach(filter => filter.addEventListener('click', () => {
     const category = filter.dataset.projectFilter;
     filters.forEach(item => {
@@ -31,7 +30,7 @@
       item.classList.toggle('is-active', active);
       item.setAttribute('aria-pressed', String(active));
     });
-    projects.forEach(project => {
+    document.querySelectorAll('[data-project-category]').forEach(project => {
       project.hidden = category !== 'todos' && !project.dataset.projectCategory.split(' ').includes(category);
     });
   }));
@@ -46,22 +45,29 @@
     }));
   });
 
-  const analyticsId = document.querySelector('meta[name="google-analytics-id"]')?.content.trim();
-  if (/^G-[A-Z0-9]+$/i.test(analyticsId || '') && !localStorage.getItem('poke.analytics-consent')) {
+  let consentVisible = false;
+  const showAnalyticsConsent = () => {
+    const analyticsId = document.querySelector('meta[name="google-analytics-id"]')?.content.trim();
+    if (!/^G-[A-Z0-9]+$/i.test(analyticsId || '') || localStorage.getItem('poke.analytics-consent') || consentVisible) return;
+    consentVisible = true;
     const consent = document.createElement('aside');
     consent.className = 'consent';
     consent.setAttribute('aria-label', 'Preferências de medição');
     consent.innerHTML = '<strong>Medir para melhorar</strong><p>Usamos métricas anônimas para entender como o site é utilizado. Você pode aceitar ou recusar a medição.</p><div class="consent__actions"><button class="button" type="button" data-consent="accept">ACEITAR</button><button class="consent__deny" type="button" data-consent="deny">RECUSAR</button><a class="consent__deny" href="/privacidade/">PRIVACIDADE</a></div>';
     consent.querySelector('[data-consent="accept"]').addEventListener('click', () => {
       window.pokeSetAnalyticsConsent?.(true);
+      consentVisible = false;
       consent.remove();
     });
     consent.querySelector('[data-consent="deny"]').addEventListener('click', () => {
       window.pokeSetAnalyticsConsent?.(false);
+      consentVisible = false;
       consent.remove();
     });
     document.body.append(consent);
-  }
+  };
+  showAnalyticsConsent();
+  window.addEventListener('poke:content-ready', showAnalyticsConsent);
 
   const contactForm = document.querySelector('[data-contact-form]');
   if (contactForm) {
