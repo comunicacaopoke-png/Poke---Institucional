@@ -15,7 +15,8 @@
     "seoDescription": "Estratégia, design e tecnologia para transformar problemas reais em movimento.",
     "defaultOgImage": "",
     "gaMeasurementId": "",
-    "contactFormEndpoint": ""
+    "contactFormEndpoint": "https://script.google.com/macros/s/AKfycbwRTf9WNmk9oBgKtdsIClex366eEfDRfvDf7rJMENyq2WPoXGNtLprz74nEOg9IsPI-3g/exec",
+    "newsletterEndpoint": "https://script.google.com/macros/s/AKfycbwRTf9WNmk9oBgKtdsIClex366eEfDRfvDf7rJMENyq2WPoXGNtLprz74nEOg9IsPI-3g/exec"
   },
   "home": {
     "heroEyebrow": "Comunicação · Design · Tecnologia",
