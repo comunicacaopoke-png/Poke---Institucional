@@ -10,6 +10,15 @@
     });
   }
 
+  document.querySelectorAll('[data-menu]').forEach(menuElement => {
+    if (menuElement.querySelector('[data-home-link]')) return;
+    const homeLink = document.createElement('a');
+    homeLink.href = '/';
+    homeLink.textContent = 'INÍCIO';
+    homeLink.dataset.homeLink = 'true';
+    menuElement.prepend(homeLink);
+  });
+
   document.querySelectorAll('.eyebrow').forEach(label => {
     const compact = label.textContent.replace(/^\[\s*|\s*\]$/g, '').trim();
     const withoutLeadingOrder = compact.replace(/^\d+\s*[-–—/]\s*/, '');
