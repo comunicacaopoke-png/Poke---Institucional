@@ -210,7 +210,7 @@
   const analyticsSlug = value => String(value || 'acao')
     .toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
     .replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '').slice(0, 32) || 'acao';
-  document.querySelectorAll('[data-track]').forEach(element => {
+  document.querySelectorAll('[data-track], .button, .nav-cta').forEach(element => {
     element.addEventListener('click', () => {
       if (element.closest('[data-contact-form]')) return;
       const label = element.textContent.trim() || element.getAttribute('aria-label') || element.href || element.dataset.track;
