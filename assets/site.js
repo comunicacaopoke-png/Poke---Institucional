@@ -258,9 +258,51 @@
     }));
   });
 
+  /* Eventos de clique. Nada aqui envia dado digitado pela pessoa: só rótulos e destinos
+     que já são públicos no HTML. Rolagem e cliques em links externos genéricos ficam a
+     cargo da medição aprimorada do GA4, para não duplicar eventos. */
+  const socialNetworks = [
+    ['instagram.com', 'instagram'],
+    ['linkedin.com', 'linkedin'],
+    ['facebook.com', 'facebook'],
+    ['youtube.com', 'youtube'],
+    ['youtu.be', 'youtube'],
+    ['tiktok.com', 'tiktok'],
+    ['behance.net', 'behance'],
+    ['x.com', 'x'],
+    ['twitter.com', 'x']
+  ];
+  const contactMethod = href => {
+    if (href.startsWith('mailto:')) return 'email';
+    if (href.startsWith('tel:')) return 'phone';
+    if (/^https?:\/\/(wa\.me|(api|web|chat)\.whatsapp\.com)\//i.test(href)) return 'whatsapp';
+    return '';
+  };
+  document.addEventListener('click', event => {
+    const anchor = event.target.closest?.('a[href]');
+    if (!anchor) return;
+    const method = contactMethod(anchor.href);
+    if (method) return window.pokeTrack('contact_click', { method });
+
+    let destination;
+    try { destination = new URL(anchor.href, window.location.href); } catch (error) { return; }
+    const label = anchor.textContent.trim().slice(0, 100);
+
+    if (destination.origin !== window.location.origin && /^https?:$/.test(destination.protocol)) {
+      const host = destination.hostname.replace(/^www\./, '');
+      const network = socialNetworks.find(([domain]) => host === domain || host.endsWith(`.${domain}`));
+      if (network) window.pokeTrack('social_click', { social_network: network[1], link_domain: host });
+      return;
+    }
+
+    if (anchor.matches('.nav-cta,.button') && anchor.dataset.track === undefined) {
+      window.pokeTrack('select_content', { content_type: 'cta', item_id: label });
+    }
+  });
+
   let consentVisible = false;
   const showAnalyticsConsent = () => {
-    const analyticsId = document.querySelector('meta[name="google-analytics-id"]')?.content.trim();
+    const analyticsId = document.querySelector('meta[name="google-analytics-id"]')?.content.trim() || window.pokeAnalyticsId;
     if (!/^G-[A-Z0-9]+$/i.test(analyticsId || '') || localStorage.getItem('poke.analytics-consent') || consentVisible) return;
     consentVisible = true;
     const consent = document.createElement('aside');
