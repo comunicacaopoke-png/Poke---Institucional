@@ -54,6 +54,65 @@
     else heading.classList.add('is-visible');
   });
 
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const mainContent = document.querySelector('main');
+  const firstContentBlock = mainContent?.firstElementChild;
+  const isHomeHero = firstContentBlock?.classList.contains('hero');
+
+  if (!prefersReducedMotion && mainContent && !isHomeHero) {
+    const navigationType = performance.getEntriesByType('navigation')[0]?.type;
+    const header = document.querySelector('.site-header');
+    const firstShell = firstContentBlock?.querySelector('.shell');
+    const entryPieces = firstShell ? [...firstShell.children].slice(0, 5) : [];
+
+    if (navigationType !== 'back_forward') {
+      requestAnimationFrame(() => {
+        header?.animate?.([
+          { opacity: 0, transform: 'translate3d(0,-15px,0)' },
+          { opacity: 1, transform: 'none' }
+        ], { duration: 440, easing: 'cubic-bezier(.16,1,.3,1)', fill: 'both' });
+        entryPieces.forEach((element, index) => element.animate?.([
+          { opacity: 0, transform: 'translate3d(0,30px,0) scale(.985)' },
+          { opacity: .96, transform: 'translate3d(0,-3px,0) scale(1.002)', offset: .82 },
+          { opacity: 1, transform: 'none' }
+        ], { duration: 720, delay: 90 + index * 95, easing: 'cubic-bezier(.16,1,.3,1)', fill: 'both' }));
+      });
+    }
+
+    const cascadeObserver = 'IntersectionObserver' in window
+      ? new IntersectionObserver((entries, observer) => entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }), { threshold: .08, rootMargin: '0px 0px -5% 0px' })
+      : null;
+    [...mainContent.children].slice(1).forEach((section, index) => {
+      const cascadeTarget = [...section.children].find(child => child.classList.contains('shell')) || section.querySelector('.shell');
+      if (!cascadeTarget) return;
+      cascadeTarget.classList.add('page-cascade');
+      cascadeTarget.style.setProperty('--page-cascade-delay', `${Math.min(index, 3) * 70}ms`);
+      if (cascadeObserver) cascadeObserver.observe(cascadeTarget);
+      else cascadeTarget.classList.add('is-visible');
+    });
+  }
+
+  if (!prefersReducedMotion) {
+    document.addEventListener('click', event => {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      const link = event.target.closest('a[href]');
+      if (!link || link.target || link.hasAttribute('download') || link.dataset.noPageTransition !== undefined) return;
+      const href = link.getAttribute('href');
+      if (!href || href.startsWith('#')) return;
+      const destination = new URL(link.href, window.location.href);
+      const isSameDocument = destination.pathname === window.location.pathname && destination.search === window.location.search && destination.hash;
+      if (destination.origin !== window.location.origin || isSameDocument || !/^https?:$/.test(destination.protocol)) return;
+      event.preventDefault();
+      document.body.classList.add('poke-page-leaving');
+      window.setTimeout(() => window.location.assign(destination.href), 230);
+    });
+    window.addEventListener('pageshow', () => document.body.classList.remove('poke-page-leaving'));
+  }
+
   const initializeArticleGalleries = () => {
     document.querySelectorAll('[data-accordion-gallery]').forEach(gallery => {
       const cards = [...gallery.querySelectorAll('.article-card')];
