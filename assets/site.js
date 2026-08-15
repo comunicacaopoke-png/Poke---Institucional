@@ -10,6 +10,15 @@
     });
   }
 
+  document.querySelectorAll('.eyebrow').forEach(label => {
+    const compact = label.textContent.replace(/^\[\s*|\s*\]$/g, '').trim();
+    const withoutLeadingOrder = compact.replace(/^\d+\s*[-–—/]\s*/, '');
+    label.textContent = withoutLeadingOrder.replace(/\s*[/–—-]\s*\d+\s*$/, '').trim();
+  });
+  document.querySelectorAll('.principle > span:first-child').forEach(marker => {
+    if (/^\d+$/.test(marker.textContent.trim())) marker.textContent = '';
+  });
+
   const revealObserver = 'IntersectionObserver' in window
     ? new IntersectionObserver((entries, observer) => entries.forEach(entry => {
       if (!entry.isIntersecting) return;
@@ -20,6 +29,34 @@
   document.querySelectorAll('.reveal').forEach(element => {
     if (revealObserver) revealObserver.observe(element);
     else element.classList.add('visible');
+  });
+
+  const maskedHeadings = document.querySelectorAll('[data-masked-heading]');
+  const maskedHeadingObserver = 'IntersectionObserver' in window
+    ? new IntersectionObserver((entries, observer) => entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-visible');
+      observer.unobserve(entry.target);
+    }), { threshold: .35 })
+    : null;
+  maskedHeadings.forEach(heading => {
+    heading.classList.add('is-pending');
+    if (maskedHeadingObserver) maskedHeadingObserver.observe(heading);
+    else heading.classList.add('is-visible');
+  });
+
+  document.querySelectorAll('[data-articles-carousel]').forEach(carousel => {
+    const rail = carousel.querySelector('.articles-carousel__rail, .insights-carousel__rail');
+    const previous = carousel.querySelector('[data-carousel-prev]');
+    const next = carousel.querySelector('[data-carousel-next]');
+    if (!rail) return;
+    const move = direction => rail.scrollBy({ left: direction * Math.max(rail.clientWidth * .82, 280), behavior: 'smooth' });
+    previous?.addEventListener('click', () => move(-1));
+    next?.addEventListener('click', () => move(1));
+    rail.addEventListener('keydown', event => {
+      if (event.key === 'ArrowLeft') { event.preventDefault(); move(-1); }
+      if (event.key === 'ArrowRight') { event.preventDefault(); move(1); }
+    });
   });
 
   const filters = document.querySelectorAll('[data-project-filter]');
@@ -92,14 +129,14 @@
           body: JSON.stringify(payload)
         });
         if (!response.ok) throw new Error('Falha ao enviar');
-        status.textContent = 'Recebemos o seu POKE. A gente continua daqui.';
+        status.textContent = 'Recebemos sua mensagem. A gente continua daqui.';
         contactForm.reset();
         window.pokeTrack('generate_lead', { form_name: 'contato' });
       } catch (error) {
         status.textContent = 'Não foi possível enviar agora. Tente novamente ou fale conosco por e-mail.';
       } finally {
         submit.disabled = false;
-        submit.textContent = 'CUTUQUE A POKE →';
+        submit.textContent = 'ENVIAR MENSAGEM →';
       }
     });
   }

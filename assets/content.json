@@ -11,17 +11,17 @@
     "linkedinUrl": "https://linkedin.com/",
     "city": "Curitiba",
     "state": "PR",
-    "seoTitle": "POKE ? Comunica??o, Design e Tecnologia",
-    "seoDescription": "Estrat?gia, design e tecnologia para transformar problemas reais em movimento.",
+    "seoTitle": "POKE — Comunicação, Design e Tecnologia",
+    "seoDescription": "Estratégia, design e tecnologia para transformar problemas reais em movimento.",
     "defaultOgImage": "",
     "gaMeasurementId": "",
     "contactFormEndpoint": ""
   },
   "home": {
-    "heroEyebrow": "Comunica??o ? Design ? Tecnologia",
+    "heroEyebrow": "Comunicação · Design · Tecnologia",
     "heroTitleLine1": "We build",
     "heroTitleLine2": "movement.",
-    "heroText": "Estrat?gia, design e tecnologia para transformar ideias, processos e problemas reais em solu??es que funcionam.",
+    "heroText": "Estratégia, design e tecnologia para transformar ideias, processos e problemas reais em soluções que funcionam.",
     "heroPrimaryCtaLabel": "Ver projetos",
     "heroPrimaryCtaUrl": "/projetos/",
     "heroSecondaryCtaLabel": "Conhecer a POKE",
@@ -32,106 +32,119 @@
   "solutions": [],
   "products": [
     {
-      "status": "published",
       "name": "PING",
       "slug": "ping",
       "headline": "O que importa, no momento certo.",
       "description": "Um jeito simples de criar lembretes e checklists sem transformar cada pequena tarefa em um projeto.",
       "imageUrl": "",
       "externalUrl": "/produtos/ping/",
-      "order": 1
+      "order": 1,
+      "status": "published"
     }
   ],
   "projects": [
     {
-      "status": "published",
-      "name": "Projeto / cliente 01",
       "client": "",
+      "name": "Projeto / cliente 01",
       "slug": "projeto-01",
       "year": "2026",
       "categories": "produtos sistemas",
-      "services": "Produto digital ? UX/UI ? Tecnologia",
+      "services": "Produto digital · UX/UI · Tecnologia",
       "heroImage": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1800&q=86",
       "url": "/projetos/projeto-01/",
       "challenge": "",
+      "idea": "",
       "solution": "",
       "result": "",
-      "featured": true,
-      "videos": "",
       "gallery": "",
-      "idea": ""
+      "videos": "",
+      "featured": true,
+      "status": "published"
     },
     {
-      "status": "published",
-      "name": "Projeto / cliente 02",
       "client": "",
+      "name": "Projeto / cliente 02",
       "slug": "projeto-02",
       "year": "2026",
       "categories": "sites branding",
-      "services": "Website ? Estrat?gia ? Design",
+      "services": "Website · Estratégia · Design",
       "heroImage": "https://images.unsplash.com/photo-1558655146-9f40138edfeb?auto=format&fit=crop&w=1600&q=86",
       "url": "/projetos/projeto-02/",
       "challenge": "",
+      "idea": "",
       "solution": "",
       "result": "",
-      "featured": false,
       "gallery": "",
-      "idea": "",
-      "videos": ""
+      "videos": "",
+      "featured": false,
+      "status": "published"
     }
   ],
   "articles": [
     {
-      "status": "published",
       "title": "Por que todo processo ruim acaba virando uma planilha?",
       "slug": "processo-ruim-planilha",
       "category": "Processos / Tecnologia",
       "author": "POKE",
-      "summary": "Planilhas n?o s?o vil?s. O problema come?a quando elas passam a esconder uma opera??o que precisa de clareza, responsabilidade e fluxo.",
+      "summary": "Planilhas não são vilãs. O problema começa quando elas passam a esconder uma operação que precisa de clareza, responsabilidade e fluxo.",
       "content": "",
       "imageUrl": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1800&q=86",
       "url": "/insights/processo-ruim-planilha/",
-      "publishedAt": "",
-      "featured": true
+      "publishedAt": "2026-08-13",
+      "featured": true,
+      "status": "published"
     },
     {
-      "status": "published",
       "title": "Sua empresa precisa mesmo de outro software?",
       "slug": "precisa-de-outro-software",
       "category": "Produto",
       "author": "POKE",
-      "summary": "",
+      "summary": "Antes de investir em mais uma ferramenta, vale separar o que é problema de software do que é problema de processo.",
       "content": "",
-      "imageUrl": "",
+      "imageUrl": "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1800&q=86",
       "url": "/insights/precisa-de-outro-software/",
-      "publishedAt": "",
-      "featured": false
+      "publishedAt": "2026-08-06",
+      "featured": false,
+      "status": "published"
     },
     {
-      "status": "published",
-      "title": "O problema n?o ? a tecnologia. ? o atrito.",
+      "title": "O problema não é a tecnologia. É o atrito.",
       "slug": "atrito-digital",
       "category": "Tecnologia",
       "author": "POKE",
-      "summary": "",
+      "summary": "Tecnologia só ajuda quando reduz esforço, incerteza e etapas que não deveriam existir.",
       "content": "",
-      "imageUrl": "",
+      "imageUrl": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1800&q=86",
       "url": "/insights/atrito-digital/",
-      "publishedAt": "",
-      "featured": false
+      "publishedAt": "2026-07-29",
+      "featured": false,
+      "status": "published"
     },
     {
-      "status": "published",
-      "title": "Seu site ? bonito. Mas algu?m encontra ele?",
+      "title": "Seu site é bonito. Mas alguém encontra ele?",
       "slug": "site-bonito-quem-encontra",
       "category": "SEO / Design",
       "author": "POKE",
-      "summary": "",
+      "summary": "Um site bem resolvido deixa claro o que a empresa faz e ajuda as pessoas certas a encontrá-la.",
       "content": "",
-      "imageUrl": "",
+      "imageUrl": "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1800&q=86",
       "url": "/insights/site-bonito-quem-encontra/",
-      "publishedAt": "",
-      "featured": false
+      "publishedAt": "2026-07-22",
+      "featured": false,
+      "status": "published"
+    },
+    {
+      "title": "Antes de escolher a ferramenta, entenda o fluxo.",
+      "slug": "entenda-o-fluxo",
+      "category": "Estratégia",
+      "author": "POKE",
+      "summary": "A melhor ferramenta não resolve um fluxo que ninguém conseguiu explicar. Comece pelo que realmente acontece.",
+      "content": "",
+      "imageUrl": "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1800&q=86",
+      "url": "/insights/entenda-o-fluxo/",
+      "publishedAt": "2026-07-16",
+      "featured": false,
+      "status": "published"
     }
   ]
 }
