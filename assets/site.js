@@ -1,0 +1,100 @@
+(() => {
+  const menuButton = document.querySelector('[data-menu-button]');
+  const menu = document.querySelector('[data-menu]');
+
+  if (menuButton && menu) {
+    menuButton.addEventListener('click', () => {
+      const isOpen = menu.classList.toggle('is-open');
+      menuButton.setAttribute('aria-expanded', String(isOpen));
+      menuButton.textContent = isOpen ? 'FECHAR' : 'MENU';
+    });
+  }
+
+  const revealObserver = 'IntersectionObserver' in window
+    ? new IntersectionObserver((entries, observer) => entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }), { threshold: .12 })
+    : null;
+  document.querySelectorAll('.reveal').forEach(element => {
+    if (revealObserver) revealObserver.observe(element);
+    else element.classList.add('visible');
+  });
+
+  const filters = document.querySelectorAll('[data-project-filter]');
+  const projects = document.querySelectorAll('[data-project-category]');
+  filters.forEach(filter => filter.addEventListener('click', () => {
+    const category = filter.dataset.projectFilter;
+    filters.forEach(item => {
+      const active = item === filter;
+      item.classList.toggle('is-active', active);
+      item.setAttribute('aria-pressed', String(active));
+    });
+    projects.forEach(project => {
+      project.hidden = category !== 'todos' && !project.dataset.projectCategory.split(' ').includes(category);
+    });
+  }));
+
+  window.pokeTrack = (eventName, params = {}) => {
+    if (typeof window.gtag === 'function') window.gtag('event', eventName, params);
+  };
+  document.querySelectorAll('[data-track]').forEach(element => {
+    element.addEventListener('click', () => window.pokeTrack(element.dataset.track, {
+      link_url: element.href || undefined,
+      link_text: element.textContent.trim()
+    }));
+  });
+
+  const analyticsId = document.querySelector('meta[name="google-analytics-id"]')?.content.trim();
+  if (/^G-[A-Z0-9]+$/i.test(analyticsId || '') && !localStorage.getItem('poke.analytics-consent')) {
+    const consent = document.createElement('aside');
+    consent.className = 'consent';
+    consent.setAttribute('aria-label', 'Preferências de medição');
+    consent.innerHTML = '<strong>Medir para melhorar</strong><p>Usamos métricas anônimas para entender como o site é utilizado. Você pode aceitar ou recusar a medição.</p><div class="consent__actions"><button class="button" type="button" data-consent="accept">ACEITAR</button><button class="consent__deny" type="button" data-consent="deny">RECUSAR</button><a class="consent__deny" href="/privacidade/">PRIVACIDADE</a></div>';
+    consent.querySelector('[data-consent="accept"]').addEventListener('click', () => {
+      window.pokeSetAnalyticsConsent?.(true);
+      consent.remove();
+    });
+    consent.querySelector('[data-consent="deny"]').addEventListener('click', () => {
+      window.pokeSetAnalyticsConsent?.(false);
+      consent.remove();
+    });
+    document.body.append(consent);
+  }
+
+  const contactForm = document.querySelector('[data-contact-form]');
+  if (contactForm) {
+    const status = contactForm.querySelector('[data-form-status]');
+    contactForm.addEventListener('submit', async event => {
+      event.preventDefault();
+      if (!contactForm.checkValidity()) return contactForm.reportValidity();
+      const endpoint = contactForm.dataset.endpoint;
+      const payload = Object.fromEntries(new FormData(contactForm).entries());
+      payload.page_url = window.location.href;
+      payload.submitted_at = new Date().toISOString();
+      const submit = contactForm.querySelector('[type="submit"]');
+      if (!endpoint) {
+        status.innerHTML = 'O envio ainda não foi configurado. Escreva para <a href="mailto:contato@seudominio.com.br">contato@seudominio.com.br</a>.';
+        return;
+      }
+      submit.disabled = true;
+      submit.textContent = 'ENVIANDO…';
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload)
+        });
+        if (!response.ok) throw new Error('Falha ao enviar');
+        status.textContent = 'Recebemos o seu POKE. A gente continua daqui.';
+        contactForm.reset();
+        window.pokeTrack('generate_lead', { form_name: 'contato' });
+      } catch (error) {
+        status.textContent = 'Não foi possível enviar agora. Tente novamente ou fale conosco por e-mail.';
+      } finally {
+        submit.disabled = false;
+        submit.textContent = 'CUTUQUE A POKE →';
+      }
+    });
+  }
+})();
