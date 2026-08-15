@@ -10,14 +10,9 @@
     });
   }
 
-  document.querySelectorAll('[data-menu]').forEach(menuElement => {
-    if (menuElement.querySelector('[data-home-link]')) return;
-    const homeLink = document.createElement('a');
-    homeLink.href = '/';
-    homeLink.textContent = 'INÍCIO';
-    homeLink.dataset.homeLink = 'true';
-    menuElement.prepend(homeLink);
-  });
+  // O item Home agora vem no HTML de todas as páginas, junto do resto do menu.
+  // Este bloco injetava um "INÍCIO" em tempo de execução e era a razão de o menu
+  // renderizado não bater com o marcado — inclusive duplicando onde já existia.
 
   document.querySelectorAll('.eyebrow').forEach(label => {
     const compact = label.textContent.replace(/^\[\s*|\s*\]$/g, '').trim();
@@ -355,6 +350,51 @@
       } finally {
         submit.disabled = false;
         submit.textContent = 'ENVIAR MENSAGEM →';
+      }
+    });
+  }
+
+  // Newsletter da home. Vai para o mesmo endpoint do contato, marcada com
+  // tipo: 'newsletter', para o painel separar inscrição de pedido de projeto.
+  const newsletterForm = document.querySelector('[data-newsletter-form]');
+  if (newsletterForm) {
+    const status = newsletterForm.querySelector('[data-form-status]');
+    const setStatus = (message, isError) => {
+      status.textContent = message;
+      if (isError) status.setAttribute('data-error', '');
+      else status.removeAttribute('data-error');
+    };
+    newsletterForm.addEventListener('submit', async event => {
+      event.preventDefault();
+      if (!newsletterForm.checkValidity()) return newsletterForm.reportValidity();
+      const endpoint = newsletterForm.dataset.endpoint;
+      const submit = newsletterForm.querySelector('[type="submit"]');
+      if (!endpoint) {
+        setStatus('A inscrição ainda não foi ativada. Escreva para contato@pokecomunicacao.com.br que a gente te inclui.', true);
+        return;
+      }
+      const label = submit.textContent;
+      submit.disabled = true;
+      submit.textContent = 'ENVIANDO…';
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({
+            tipo: 'newsletter',
+            email: newsletterForm.email.value.trim(),
+            page_url: window.location.href,
+            submitted_at: new Date().toISOString()
+          })
+        });
+        if (!response.ok) throw new Error('Falha ao inscrever');
+        setStatus('Pronto. Você entrou na lista.', false);
+        newsletterForm.reset();
+        window.pokeTrack('sign_up', { method: 'newsletter' });
+      } catch (error) {
+        setStatus('Não foi possível inscrever agora. Tente de novo em instantes.', true);
+      } finally {
+        submit.disabled = false;
+        submit.textContent = label;
       }
     });
   }
