@@ -105,7 +105,6 @@
     const cards = items.slice(0, limit).map(article => {
       const card = link(article.url, 'article-card');
       const imageUrl = text(article.imageUrl, fallbackImage);
-      card.style.setProperty('--article-image', `url("${imageUrl.replace(/["\\]/g, '\\$&')}")`);
       const media = element('div', 'article-card__media');
       media.setAttribute('aria-hidden', 'true');
       media.append(image(imageUrl, ''));

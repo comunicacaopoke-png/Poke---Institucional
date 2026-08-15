@@ -19,6 +19,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/insights-carousel.css" />
   <style>
     :root{
       --black:#070707;
@@ -171,25 +172,6 @@
     .step p{margin:0;font:300 13px/1.75 var(--mono);color:#a4a49e;max-width:620px}
 
     .articles{padding:130px 0;background:#080808}
-    .articles-carousel{position:relative;margin-top:65px}
-    .articles-carousel__top{display:flex;align-items:center;justify-content:space-between;gap:24px;margin:0 0 24px}
-    .articles-carousel__note{margin:0;color:#898983;font:400 11px/1.5 var(--mono);letter-spacing:.04em;text-transform:uppercase}
-    .articles-carousel__controls{display:flex;gap:8px}
-    .carousel-control{display:grid;place-items:center;width:44px;height:44px;border:1px solid rgba(255,255,255,.28);border-radius:50%;background:transparent;color:#fff;font-size:22px;transition:background .2s ease,color .2s ease,transform .2s ease}
-    .carousel-control:hover{background:var(--green);color:#080808;transform:translateY(-2px)}
-    .articles-carousel__rail{display:grid;grid-auto-flow:column;grid-auto-columns:clamp(290px,32vw,470px);gap:16px;overflow-x:auto;overscroll-behavior-inline:contain;scroll-snap-type:inline mandatory;scrollbar-width:thin;scrollbar-color:var(--green) rgba(255,255,255,.12);padding-bottom:18px}
-    .articles-carousel__rail::-webkit-scrollbar{height:4px}.articles-carousel__rail::-webkit-scrollbar-track{background:rgba(255,255,255,.12)}.articles-carousel__rail::-webkit-scrollbar-thumb{background:var(--green)}
-    .article-card{position:relative;isolation:isolate;display:flex;min-height:clamp(430px,48vw,620px);overflow:hidden;background:#171717;scroll-snap-align:start;color:#fff}
-    .article-card__media,.article-card__media:after{position:absolute;inset:0}.article-card__media{z-index:-2;overflow:hidden;background:#232323}.article-card__media img{width:100%;height:100%;object-fit:cover;filter:grayscale(.9) saturate(.72) brightness(.6);transform:scale(1.03);transition:filter .75s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}
-    .article-card__media:after{content:"";background:linear-gradient(180deg,rgba(3,3,3,.1) 5%,rgba(3,3,3,.86) 88%);z-index:1}
-    .article-card__content{display:flex;flex:1;flex-direction:column;justify-content:flex-end;align-items:flex-start;padding:clamp(22px,3vw,36px)}
-    .article-card__category{margin:0 0 15px;color:var(--green);font:500 10px/1.4 var(--mono);letter-spacing:.1em;text-transform:uppercase}
-    .article-card h3{margin:0;font-size:clamp(31px,3.5vw,56px);line-height:.86;letter-spacing:-.06em;transition:color .3s ease,background-position 1s cubic-bezier(.16,1,.3,1)}
-    .article-card__summary{max-height:0;max-width:38ch;margin:0;overflow:hidden;opacity:0;transform:translateY(16px);font:400 14px/1.55 var(--display);transition:max-height .55s ease,opacity .36s ease .08s,transform .55s cubic-bezier(.16,1,.3,1)}
-    .article-card__link{display:inline-flex;margin-top:18px;align-items:center;gap:8px;color:var(--green);font:500 10px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;opacity:0;transform:translateY(12px);transition:opacity .35s ease .12s,transform .55s cubic-bezier(.16,1,.3,1)}
-    .article-card:hover .article-card__media img,.article-card:focus-visible .article-card__media img{filter:grayscale(0) saturate(1) brightness(.82);transform:scale(1.1)}
-    @supports (-webkit-text-fill-color:transparent){.article-card:hover h3,.article-card:focus-visible h3{color:transparent;background-image:var(--article-image);background-size:cover;background-position:50% 50%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}}
-    .article-card:hover .article-card__summary,.article-card:focus-visible .article-card__summary{max-height:150px;opacity:1;transform:none}.article-card:hover .article-card__link,.article-card:focus-visible .article-card__link{opacity:1;transform:none}
 
     .cta{min-height:80svh;display:flex;align-items:center;background:linear-gradient(90deg,rgba(5,5,5,.94),rgba(5,5,5,.42)),url('https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=2400&q=88') center/cover no-repeat}
     .cta h2{font-size:clamp(52px,8vw,126px);line-height:.89;letter-spacing:-.06em;margin:18px 0 44px;max-width:1200px}
@@ -225,10 +207,9 @@
       .service-row{grid-template-columns:1fr auto;padding:26px 0}
       .project{padding:45px 0}.project-media{height:360px}
       .product-feature{min-height:560px}
-      .articles-carousel__top{align-items:flex-start}.articles-carousel__note{max-width:18ch}.articles-carousel__rail{grid-auto-columns:84vw}.article-card{min-height:470px}
       .footer-bottom{flex-direction:column}
     }
-    @media(prefers-reduced-motion:reduce){.masked-heading span{clip-path:none;opacity:1;transform:none;animation:none!important}.article-card *{transition-duration:.01ms!important}}
+    @media(prefers-reduced-motion:reduce){.masked-heading span{clip-path:none;opacity:1;transform:none;animation:none!important}}
   </style>
   <script type="application/ld+json">
   {
@@ -379,10 +360,10 @@
   <section class="articles">
     <div class="shell">
       <div class="section-title reveal"><div><span class="eyebrow">Ideias</span><h2>Artigos &<br>insights.</h2></div><p>Conteúdo pensado também como ativo de descoberta orgânica: produto, comunicação, design, tecnologia e eficiência.</p></div>
-      <div class="articles-carousel reveal" data-articles-carousel>
-        <div class="articles-carousel__top"><p class="articles-carousel__note">Passe para o lado ou use as setas</p><div class="articles-carousel__controls"><button class="carousel-control" type="button" data-carousel-prev aria-label="Ver artigos anteriores">←</button><button class="carousel-control" type="button" data-carousel-next aria-label="Ver próximos artigos">→</button></div></div>
-        <div class="articles-carousel__rail" data-cms-insights data-insights-limit="5" tabindex="0" aria-label="Cinco artigos mais recentes">
-          <a class="article-card" href="/insights/processo-ruim-planilha/" style="--article-image:url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1800&q=86')"><div class="article-card__media"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1800&q=86" alt="" /></div><div class="article-card__content"><span class="article-card__category">Processos e tecnologia</span><h3>Por que todo processo ruim acaba virando uma planilha?</h3><p class="article-card__summary">Quando uma planilha passa a esconder uma operação, é hora de tornar o processo mais claro.</p><span class="article-card__link">Ler artigo ↗</span></div></a>
+      <div class="article-gallery reveal">
+        <div class="article-gallery__intro"><span class="eyebrow">Últimos artigos</span><p>Passe pelas imagens para abrir uma prévia. Cada uma leva ao artigo completo.</p></div>
+        <div class="article-gallery__rail" data-cms-insights data-insights-limit="5" aria-label="Cinco artigos mais recentes">
+          <a class="article-card" href="/insights/processo-ruim-planilha/"><div class="article-card__media"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1800&q=86" alt="" /></div><div class="article-card__content"><span class="article-card__category">Processos e tecnologia</span><h3>Por que todo processo ruim acaba virando uma planilha?</h3><p class="article-card__summary">Quando uma planilha passa a esconder uma operação, é hora de tornar o processo mais claro.</p><span class="article-card__link">Ler artigo ↗</span></div></a>
         </div>
       </div>
     </div>

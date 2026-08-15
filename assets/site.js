@@ -54,20 +54,6 @@
     else heading.classList.add('is-visible');
   });
 
-  document.querySelectorAll('[data-articles-carousel]').forEach(carousel => {
-    const rail = carousel.querySelector('.articles-carousel__rail, .insights-carousel__rail');
-    const previous = carousel.querySelector('[data-carousel-prev]');
-    const next = carousel.querySelector('[data-carousel-next]');
-    if (!rail) return;
-    const move = direction => rail.scrollBy({ left: direction * Math.max(rail.clientWidth * .82, 280), behavior: 'smooth' });
-    previous?.addEventListener('click', () => move(-1));
-    next?.addEventListener('click', () => move(1));
-    rail.addEventListener('keydown', event => {
-      if (event.key === 'ArrowLeft') { event.preventDefault(); move(-1); }
-      if (event.key === 'ArrowRight') { event.preventDefault(); move(1); }
-    });
-  });
-
   const filters = document.querySelectorAll('[data-project-filter]');
   filters.forEach(filter => filter.addEventListener('click', () => {
     const category = filter.dataset.projectFilter;
