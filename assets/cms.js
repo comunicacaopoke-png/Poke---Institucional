@@ -89,27 +89,30 @@
   const renderInsights = articles => {
     const target = document.querySelector('[data-cms-insights]');
     if (!target) return;
-    const items = published(articles);
-    if (!items.length) return;
-    const featured = items.find(article => article.featured) || items[0];
-    const feature = link(featured.url, 'insights-feature');
-    const visual = element('div', 'insights-feature__image');
-    if (featured.imageUrl) visual.style.backgroundImage = `url("${featured.imageUrl.replace(/"/g, '%22')}")`;
-    feature.append(visual);
-    const copy = element('div');
-    copy.append(element('span', 'eyebrow', `[ ${text(featured.category, 'INSIGHTS').toUpperCase()} ]`));
-    copy.append(element('h2', '', featured.title));
-    copy.append(element('p', '', featured.summary));
-    const cta = element('span', 'nav-cta', 'LER ARTIGO →'); cta.style.marginTop = '25px'; copy.append(cta); feature.append(copy);
-    const list = element('div', 'article-list'); list.style.marginTop = '70px';
-    items.filter(article => article !== featured).forEach(article => {
-      const row = link(article.url, 'article-row');
-      row.append(element('span', 'date', text(article.category, 'Insights')));
-      row.append(element('h2', '', article.title));
-      row.append(element('span', 'arrow', '↗'));
-      list.append(row);
+    const fallbackImage = 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1800&q=86';
+    const items = published(articles).sort((first, second) => {
+      const firstDate = Date.parse(first.publishedAt || '') || 0;
+      const secondDate = Date.parse(second.publishedAt || '') || 0;
+      return secondDate - firstDate;
     });
-    target.replaceChildren(feature, list);
+    if (!items.length) return;
+    const limit = Math.max(1, Number(target.dataset.insightsLimit) || 5);
+    const cards = items.slice(0, limit).map(article => {
+      const card = link(article.url, 'article-card');
+      const imageUrl = text(article.imageUrl, fallbackImage);
+      card.style.setProperty('--article-image', `url("${imageUrl.replace(/["\\]/g, '\\$&')}")`);
+      const media = element('div', 'article-card__media');
+      media.setAttribute('aria-hidden', 'true');
+      media.append(image(imageUrl, ''));
+      const copy = element('div', 'article-card__content');
+      copy.append(element('span', 'article-card__category', text(article.category, 'Insights')));
+      copy.append(element('h3', '', text(article.title, 'Novo artigo')));
+      copy.append(element('p', 'article-card__summary', text(article.summary, 'Uma leitura curta sobre decisões de produto, design, comunicação e tecnologia.')));
+      copy.append(element('span', 'article-card__link', 'Ler artigo ↗'));
+      card.append(media, copy);
+      return card;
+    });
+    target.replaceChildren(...cards);
   };
 
   fetch(contentUrl, { cache: 'no-store' })
