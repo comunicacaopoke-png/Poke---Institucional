@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://comunicacaopoke-png.github.io/Poke---Institucional/sitemap.xml
+Sitemap: https://www.pokecomunicacao.com.br/sitemap.xml

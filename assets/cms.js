@@ -1,5 +1,5 @@
 (() => {
-  const repositoryBase = window.location.pathname.startsWith('/Poke---Institucional/') ? '/Poke---Institucional' : '';
+  const repositoryBase = '';
   const sitePath = url => String(url || '').startsWith('/') ? `${repositoryBase}${url}` : url;
   const contentUrl = sitePath('/assets/content.json');
   const published = items => (Array.isArray(items) ? items : []).filter(item => item.status === 'published');
@@ -54,13 +54,18 @@
     const items = published(projects);
     if (!items.length) return;
     target.replaceChildren(...items.map(project => {
-      const card = link(project.url, 'project-tile');
+      const card = link(project.url, 'portfolio-card');
       card.dataset.projectCategory = text(project.categories, 'todos').toLowerCase();
-      card.append(image(project.heroImage, project.name));
-      const caption = element('div', 'project-tile__caption');
-      caption.append(element('span', 'tag', [project.services, project.year].filter(Boolean).join(' / ')));
+      const media = element('div', 'portfolio-card__media');
+      media.append(image(project.heroImage, project.name));
+      card.append(media);
+      const caption = element('div', 'portfolio-card__caption');
+      caption.append(element('span', 'portfolio-card__tag', [project.services, project.year].filter(Boolean).join(' · ')));
       const title = element('h2', '', text(project.name));
-      caption.append(title); card.append(caption); return card;
+      caption.append(title);
+      caption.append(element('p', 'portfolio-card__summary', text(project.result || project.solution || project.challenge, 'Estratégia, design e tecnologia desenvolvidos para este contexto.')));
+      caption.append(element('span', 'portfolio-card__link', 'Ver projeto ↗'));
+      card.append(caption); return card;
     }));
   };
 
