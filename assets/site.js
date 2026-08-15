@@ -54,6 +54,38 @@
     else heading.classList.add('is-visible');
   });
 
+  const initializeArticleGalleries = () => {
+    document.querySelectorAll('[data-accordion-gallery]').forEach(gallery => {
+      const cards = [...gallery.querySelectorAll('.article-card')];
+      if (!cards.length) return;
+      const defaultIndex = Math.min(Math.max(Number(gallery.dataset.accordionDefault) || 0, 0), cards.length - 1);
+      const activate = (index, preview = false) => {
+        cards.forEach((card, cardIndex) => {
+          const active = cardIndex === index;
+          card.classList.toggle('is-active', active);
+          card.classList.toggle('is-preview', active && preview);
+        });
+      };
+      cards.forEach((card, index) => {
+        card.onpointerenter = () => activate(index, true);
+        card.onfocus = () => activate(index, true);
+        card.onpointermove = event => {
+          if (event.pointerType && event.pointerType !== 'mouse') return;
+          const bounds = card.getBoundingClientRect();
+          const x = ((event.clientX - bounds.left) / bounds.width - .5) * -2.5;
+          const y = ((event.clientY - bounds.top) / bounds.height - .5) * -2.5;
+          card.style.setProperty('--image-x', `${x.toFixed(2)}%`);
+          card.style.setProperty('--image-y', `${y.toFixed(2)}%`);
+        };
+      });
+      gallery.onpointerleave = () => activate(defaultIndex);
+      activate(defaultIndex);
+      gallery.classList.add('is-ready');
+    });
+  };
+  initializeArticleGalleries();
+  window.addEventListener('poke:content-ready', initializeArticleGalleries);
+
   const filters = document.querySelectorAll('[data-project-filter]');
   filters.forEach(filter => filter.addEventListener('click', () => {
     const category = filter.dataset.projectFilter;
