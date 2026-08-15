@@ -153,15 +153,12 @@
 
     .projects{padding:140px 0;background:var(--white);color:#090909}
     .projects .eyebrow{color:#111}
-    .project-list{margin-top:70px}
-    .project{display:grid;grid-template-columns:1.25fr .75fr;gap:70px;padding:70px 0;border-top:1px solid rgba(0,0,0,.18);align-items:end}
-    .project:last-child{border-bottom:1px solid rgba(0,0,0,.18)}
-    .project-media{height:540px;overflow:hidden;background:#d6d6d2}
-    .project-media img{width:100%;height:100%;object-fit:cover;filter:saturate(.72) contrast(1.02);transition:transform .8s cubic-bezier(.2,.8,.2,1)}
-    .project:hover .project-media img{transform:scale(1.035)}
-    .project h3{font-size:clamp(34px,4.7vw,72px);line-height:.95;letter-spacing:-.045em;margin:0 0 20px}
-    .project p{font:400 15px/1.7 var(--display);color:#4e4e49}
-    .project .tag{font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.08em;color:#171717}
+    .home-bento{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-flow:dense;grid-auto-rows:clamp(90px,9.5vw,155px);gap:2px;overflow:hidden;border-radius:28px;background:#171717}
+    .home-bento__card{position:relative;isolation:isolate;display:flex;min-height:220px;overflow:hidden;background:#252525;color:#fff}
+    .home-bento__card:nth-child(1){grid-column:span 3;grid-row:span 3}.home-bento__card:nth-child(2){grid-column:span 2;grid-row:span 2}.home-bento__card:nth-child(3){grid-column:span 1;grid-row:span 2}.home-bento__card:nth-child(4){grid-column:span 2;grid-row:span 2}.home-bento__card:nth-child(5){grid-column:span 1;grid-row:span 2}.home-bento__card:nth-child(6){grid-column:span 3;grid-row:span 2}.home-bento__card:nth-child(7){grid-column:span 1;grid-row:span 2}.home-bento__card:nth-child(8){grid-column:span 2;grid-row:span 2}.home-bento__card:nth-child(9){grid-column:span 2;grid-row:span 2}.home-bento__card:nth-child(10){grid-column:span 1;grid-row:span 2}.home-bento__card:nth-child(11){grid-column:span 2;grid-row:span 2}.home-bento__card:nth-child(12){grid-column:span 3;grid-row:span 2}
+    .home-bento__media,.home-bento__media:after{position:absolute;inset:0}.home-bento__media{z-index:-2;overflow:hidden}.home-bento__media img{width:100%;height:100%;object-fit:cover;filter:saturate(.8) brightness(.84);transform:scale(1.01);transition:transform 1s cubic-bezier(.16,1,.3,1),filter .8s ease}.home-bento__media:after{content:"";background:linear-gradient(180deg,rgba(5,5,5,.02) 22%,rgba(5,5,5,.78) 100%);opacity:.62;transition:opacity .75s ease,background .75s ease}
+    .home-bento__caption{display:flex;flex:1;flex-direction:column;justify-content:flex-end;align-items:flex-start;padding:clamp(21px,2.6vw,42px);transform-origin:left bottom}.home-bento__tag{margin-bottom:10px;color:rgba(255,255,255,.76);font:500 10px/1.35 var(--mono);letter-spacing:.08em;text-transform:uppercase}.home-bento__card h3{max-width:15ch;margin:0;font-size:clamp(25px,2.55vw,48px);line-height:.9;letter-spacing:-.06em;transition:transform .6s cubic-bezier(.16,1,.3,1)}.home-bento__summary{max-width:37ch;max-height:0;margin:0;overflow:hidden;opacity:0;transform:translateY(14px);font-size:clamp(13px,1vw,16px);line-height:1.4;transition:max-height .55s ease,opacity .35s ease .08s,transform .55s cubic-bezier(.16,1,.3,1)}.home-bento__link{display:inline-flex;align-items:center;margin-top:15px;color:var(--green);font:500 10px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;opacity:0;transform:translateY(12px);transition:opacity .35s ease .12s,transform .55s cubic-bezier(.16,1,.3,1)}
+    .home-bento__card:hover .home-bento__media img,.home-bento__card:focus-visible .home-bento__media img{filter:saturate(1) brightness(.76);transform:scale(1.09)}.home-bento__card:hover .home-bento__media:after,.home-bento__card:focus-visible .home-bento__media:after{opacity:1;background:linear-gradient(180deg,rgba(5,5,5,.12) 14%,rgba(5,5,5,.9) 100%)}.home-bento__card:hover h3,.home-bento__card:focus-visible h3{transform:scale(1.045)}.home-bento__card:hover .home-bento__summary,.home-bento__card:focus-visible .home-bento__summary{max-height:120px;opacity:1;transform:none}.home-bento__card:hover .home-bento__link,.home-bento__card:focus-visible .home-bento__link{opacity:1;transform:none}
 
     .process{padding:150px 0;background:#111}
     .process-head{display:grid;grid-template-columns:.6fr 1.4fr;gap:70px;margin-bottom:80px}
@@ -192,12 +189,12 @@
 
     @media(max-width:980px){
       .nav-links{display:none}.nav-links.is-open{position:absolute;top:72px;right:0;left:0;display:flex;flex-direction:column;align-items:stretch;gap:0;padding:16px var(--pad) 22px;background:#02080b;border-bottom:1px solid rgba(255,255,255,.1)}.nav-links.is-open a{padding:14px 0}.menu-btn{display:block;margin-left:auto}.nav-cta{display:none}
-      .hero-topline,.hero-bottom,.intro-grid,.services-head,.manifesto-grid,.section-title,.process-head,.project,.footer-grid{grid-template-columns:1fr;display:grid}
+      .hero-topline,.hero-bottom,.intro-grid,.services-head,.manifesto-grid,.section-title,.process-head,.footer-grid{grid-template-columns:1fr;display:grid}
       .hero{height:165svh;min-height:980px}.hero-content{align-items:flex-end}.hero-topline{width:min(38vw,400px);display:flex;align-items:flex-end;gap:14px;margin-bottom:55px;text-align:right}.hero h1{width:min(38vw,400px);font-size:clamp(48px,7.4vw,76px);text-align:right}.hero-bottom{width:min(38vw,400px);display:grid;gap:20px;text-align:right}.hero-actions{justify-content:flex-end}.hero-note{max-width:100%}
-      .intro-grid,.services-head,.manifesto-grid,.process-head,.project{gap:36px}
+      .intro-grid,.services-head,.manifesto-grid,.process-head{gap:36px}
       .service-row{grid-template-columns:1fr auto}.service-row p{display:none}
       .step{grid-template-columns:1fr}.step p{grid-column:auto}
-      .project-media{height:52vw;min-height:320px}
+      .home-bento{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:clamp(160px,27vw,300px)}.home-bento__card:nth-child(n){grid-column:span 1;grid-row:span 1}.home-bento__card:nth-child(4n+1){grid-column:span 2;grid-row:span 2}.home-bento__caption{padding:26px}.home-bento__card h3{font-size:clamp(28px,4.6vw,46px)}
     }
     @media(max-width:620px){
       .nav{height:72px}.brand img{height:22px}
@@ -205,11 +202,11 @@
       .intro,.services,.products,.projects,.process,.articles{padding-top:95px;padding-bottom:95px}
       .image-break{min-height:58svh}
       .service-row{grid-template-columns:1fr auto;padding:26px 0}
-      .project{padding:45px 0}.project-media{height:360px}
+      .home-bento{grid-template-columns:1fr;grid-auto-rows:280px;border-radius:20px}.home-bento__card:nth-child(n){grid-column:auto;grid-row:auto;min-height:280px}.home-bento__caption{padding:24px}.home-bento__summary{max-height:120px;opacity:1;transform:none}.home-bento__link{opacity:1;transform:none}.home-bento__media img{filter:saturate(.9) brightness(.68)}
       .product-feature{min-height:560px}
       .footer-bottom{flex-direction:column}
     }
-    @media(prefers-reduced-motion:reduce){.masked-heading span{clip-path:none;opacity:1;transform:none;animation:none!important}}
+    @media(prefers-reduced-motion:reduce){.masked-heading span{clip-path:none;opacity:1;transform:none;animation:none!important}.home-bento__card *{transition-duration:.01ms!important}}
   </style>
   <script type="application/ld+json">
   {
@@ -333,12 +330,22 @@
     </div>
   </section>
 
-  <section class="projects">
+  <section class="projects" id="projetos">
     <div class="shell">
       <div class="section-title reveal"><div><span class="eyebrow">Projetos</span><h2>Coisas<br>funcionando.</h2></div><p>Projetos em que comunicação, experiência e tecnologia precisaram trabalhar juntas para resolver um problema de verdade.</p></div>
-      <div class="project-list">
-        <a href="/projetos/projeto-01/" class="project reveal"><div class="project-media"><img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1600&q=86" alt="Equipe colaborando em um ambiente de trabalho contemporâneo" loading="lazy" /></div><div><span class="tag">Produto digital · UX/UI · Tecnologia</span><h3>Projeto / cliente 01</h3><p>Uma breve descrição orientada ao problema, ao que foi construído e ao impacto gerado.</p><span class="text-link" style="border-color:rgba(0,0,0,.35)">Ver projeto ↗</span></div></a>
-        <a href="/projetos/projeto-02/" class="project reveal"><div class="project-media"><img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1600&q=86" alt="Pessoas discutindo estratégia em uma mesa de trabalho" loading="lazy" /></div><div><span class="tag">Website · Estratégia · Design</span><h3>Projeto / cliente 02</h3><p>Uma breve descrição orientada ao problema, ao que foi construído e ao impacto gerado.</p><span class="text-link" style="border-color:rgba(0,0,0,.35)">Ver projeto ↗</span></div></a>
+      <div class="home-bento reveal" aria-label="Seleção de projetos">
+        <a href="/projetos/projeto-01/" class="home-bento__card"><div class="home-bento__media"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1800&q=86" alt="Painel com dados de um produto digital" loading="lazy"></div><div class="home-bento__caption"><span class="home-bento__tag">Produto digital</span><h3>Produto que evolui.</h3><p class="home-bento__summary">Estratégia, interface e tecnologia reunidas em uma experiência útil.</p><span class="home-bento__link">Ver projeto ↗</span></div></a>
+        <a href="/projetos/projeto-02/" class="home-bento__card"><div class="home-bento__media"><img src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?auto=format&fit=crop&w=1600&q=86" alt="Materiais de identidade visual em uma mesa" loading="lazy"></div><div class="home-bento__caption"><span class="home-bento__tag">Marca</span><h3>Marca em movimento.</h3><p class="home-bento__summary">Identidade para dar clareza, consistência e presença.</p><span class="home-bento__link">Ver projeto ↗</span></div></a>
+        <a href="/projetos/" class="home-bento__card"><div class="home-bento__media"><img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1200&q=86" alt="Time reunido em uma sala de trabalho" loading="lazy"></div><div class="home-bento__caption"><span class="home-bento__tag">Estratégia</span><h3>Decisão em conjunto.</h3><p class="home-bento__summary">Projetos que começam entendendo o contexto.</p><span class="home-bento__link">Ver projetos ↗</span></div></a>
+        <a href="/projetos/" class="home-bento__card"><div class="home-bento__media"><img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=1600&q=86" alt="Computador exibindo uma página web" loading="lazy"></div><div class="home-bento__caption"><span class="home-bento__tag">Web</span><h3>Presença que orienta.</h3><p class="home-bento__summary">Experiências digitais claras para as pessoas certas encontrarem.</p><span class="home-bento__link">Ver projetos ↗</span></div></a>
+        <a href="/projetos/" class="home-bento__card"><div class="home-bento__media"><img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=86" alt="Ambiente de escritório contemporâneo" loading="lazy"></div><div class="home-bento__caption"><span class="home-bento__tag">Operação</span><h3>Mais clareza.</h3><p class="home-bento__summary">Fluxos que deixam a rotina mais simples.</p><span class="home-bento__link">Ver projetos ↗</span></div></a>
+        <a href="/projetos/" class="home-bento__card"><div class="home-bento__media"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1800&q=86" alt="Componentes eletrônicos em uma placa" loading="lazy"></div><div class="home-bento__caption"><span class="home-bento__tag">Tecnologia</span><h3>Menos atrito.</h3><p class="home-bento__summary">Tecnologia que reduz esforço em vez de criar mais etapas.</p><span class="home-bento__link">Ver projetos ↗</span></div></a>
+        <a href="/projetos/" class="home-bento__card"><div class="home-bento__media"><img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1200&q=86" alt="Pessoas conversando em uma reunião" loading="lazy"></div><div class="home-bento__caption"><span class="home-bento__tag">Comunicação</span><h3>Ideias conectadas.</h3><p class="home-bento__summary">Conteúdo, design e negócio na mesma conversa.</p><span class="home-bento__link">Ver projetos ↗</span></div></a>
+        <a href="/projetos/" class="home-bento__card"><div class="home-bento__media"><img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1400&q=86" alt="Pessoa trabalhando em um notebook" loading="lazy"></div><div class="home-bento__caption"><span class="home-bento__tag">Conteúdo</span><h3>Mensagem que chega.</h3><p class="home-bento__summary">Linguagem pensada para ser encontrada e compreendida.</p><span class="home-bento__link">Ver projetos ↗</span></div></a>
+        <a href="/projetos/" class="home-bento__card"><div class="home-bento__media"><img src="https://images.unsplash.com/photo-1523726491678-bf852e717f6a?auto=format&fit=crop&w=1400&q=86" alt="Pessoa analisando informações em uma tela" loading="lazy"></div><div class="home-bento__caption"><span class="home-bento__tag">Sistema</span><h3>Informação conectada.</h3><p class="home-bento__summary">Sistemas que organizam dados e próximos passos.</p><span class="home-bento__link">Ver projetos ↗</span></div></a>
+        <a href="/projetos/" class="home-bento__card"><div class="home-bento__media"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=86" alt="Pessoa desenhando um fluxo em papel" loading="lazy"></div><div class="home-bento__caption"><span class="home-bento__tag">Processo</span><h3>Fluxo sem ruído.</h3><p class="home-bento__summary">Antes da ferramenta, o entendimento do que precisa acontecer.</p><span class="home-bento__link">Ver projetos ↗</span></div></a>
+        <a href="/projetos/" class="home-bento__card"><div class="home-bento__media"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1400&q=86" alt="Grupo em conversa durante um workshop" loading="lazy"></div><div class="home-bento__caption"><span class="home-bento__tag">Experiência</span><h3>Construído junto.</h3><p class="home-bento__summary">Uma solução ganha força quando nasce com quem vai usá-la.</p><span class="home-bento__link">Ver projetos ↗</span></div></a>
+        <a href="/projetos/" class="home-bento__card"><div class="home-bento__media"><img src="https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=1800&q=86" alt="Pessoa criando uma interface em um computador" loading="lazy"></div><div class="home-bento__caption"><span class="home-bento__tag">Design</span><h3>Uma ideia em uso.</h3><p class="home-bento__summary">Interfaces e marcas que saem do papel para funcionar no mundo.</p><span class="home-bento__link">Ver projetos ↗</span></div></a>
       </div>
       <div style="margin-top:45px" class="reveal"><a class="text-link" href="/projetos/">Ver todos os projetos <span>→</span></a></div>
     </div>
