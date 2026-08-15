@@ -59,7 +59,7 @@
   const firstContentBlock = mainContent?.firstElementChild;
   const isHomeHero = firstContentBlock?.classList.contains('hero');
 
-  if (!prefersReducedMotion && mainContent && !isHomeHero) {
+  if (!prefersReducedMotion && mainContent && !isHomeHero && !document.body.classList.contains('a-poke-story')) {
     const navigationType = performance.getEntriesByType('navigation')[0]?.type;
     const header = document.querySelector('.site-header');
     const firstShell = firstContentBlock?.querySelector('.shell');
@@ -79,21 +79,67 @@
       });
     }
 
-    const cascadeObserver = 'IntersectionObserver' in window
+    const motionObserver = 'IntersectionObserver' in window
       ? new IntersectionObserver((entries, observer) => entries.forEach(entry => {
         if (!entry.isIntersecting) return;
         entry.target.classList.add('is-visible');
         observer.unobserve(entry.target);
-      }), { threshold: .08, rootMargin: '0px 0px -5% 0px' })
+      }), { threshold: .02, rootMargin: '0px 0px 7% 0px' })
       : null;
-    [...mainContent.children].slice(1).forEach((section, index) => {
-      const cascadeTarget = [...section.children].find(child => child.classList.contains('shell')) || section.querySelector('.shell');
-      if (!cascadeTarget) return;
-      cascadeTarget.classList.add('page-cascade');
-      cascadeTarget.style.setProperty('--page-cascade-delay', `${Math.min(index, 3) * 70}ms`);
-      if (cascadeObserver) cascadeObserver.observe(cascadeTarget);
-      else cascadeTarget.classList.add('is-visible');
-    });
+
+    const prepareScrollStage = (stage, stageIndex) => {
+      if (stage.hidden || stage === firstContentBlock) return;
+      stage.classList.add('scroll-stage');
+      const frame = stage.querySelector(':scope > .shell') || stage;
+      const pieces = new Set();
+      const add = (element, motion = 'rise') => {
+        if (!element || pieces.has(element)) return;
+        pieces.add(element);
+        element.classList.add('scroll-piece');
+        element.dataset.scrollMotion = motion;
+        element.style.setProperty('--scroll-delay', `${Math.min(pieces.size - 1, 7) * 86}ms`);
+      };
+      const addAll = (selector, motion) => frame.querySelectorAll(selector).forEach(element => add(element, motion));
+
+      if (stage.classList.contains('article-body')) {
+        [...stage.children].filter(element => element.matches('p,h2,h3,.pullquote,figure,img,ul,ol')).forEach((element, index) => {
+          add(element, element.matches('figure,img') ? 'zoom' : index % 3 === 1 ? 'left' : 'rise');
+        });
+      } else if (stage.classList.contains('service-block')) {
+        addAll(':scope > .service-block__media', stageIndex % 2 ? 'left' : 'right');
+        addAll(':scope > .service-block__copy', 'rise');
+      } else {
+        addAll(':scope > .section-heading', 'rise');
+        addAll(':scope > .split > .split__media,:scope > .split > .gallery,:scope > .split > figure', stageIndex % 2 ? 'left' : 'right');
+        addAll(':scope > .split > :not(.split__media):not(.gallery):not(figure)', 'rise');
+        addAll(':scope > .contact-layout > *', 'rise');
+        addAll(':scope > .insights-feature > *', 'rise');
+        addAll(':scope > .principles > .principle', 'rise');
+        addAll(':scope > .editorial-list > .editorial,:scope > .article-list > .article-row', 'rise');
+        addAll(':scope > .gallery > img', 'zoom');
+        addAll(':scope > .portfolio-grid > .portfolio-card,:scope > .projects-grid > .project-tile', 'zoom');
+        addAll(':scope > .filters,:scope > .prose.small,:scope > .article-gallery__rail', 'rise');
+
+        if (!pieces.size) {
+          [...frame.children].filter(element => !element.hidden).forEach((element, index) => {
+            const motion = element.matches('.split__media,.service-block__media,.gallery,img,figure')
+              ? 'zoom'
+              : index % 3 === 1 ? 'left' : 'rise';
+            add(element, motion);
+          });
+        }
+      }
+
+      if (!stage.dataset.scrollStageReady) {
+        stage.dataset.scrollStageReady = 'true';
+        if (motionObserver) motionObserver.observe(stage);
+        else stage.classList.add('is-visible');
+      }
+    };
+
+    const prepareScrollStages = () => [...mainContent.children].forEach(prepareScrollStage);
+    prepareScrollStages();
+    window.addEventListener('poke:content-ready', prepareScrollStages);
   }
 
   if (!prefersReducedMotion) {
