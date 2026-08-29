@@ -147,31 +147,33 @@
     .section-title{display:flex;justify-content:space-between;gap:50px;align-items:flex-end;margin-bottom:72px}
     .section-title h2{font-size:clamp(48px,7vw,110px);line-height:.9;letter-spacing:-.055em;margin:0}
     .section-title p{max-width:460px;font:400 15px/1.7 var(--display);color:#a5a59f}
-    .product-feature{min-height:660px;position:relative;display:flex;align-items:flex-end;overflow:hidden;border-top:1px solid var(--line)}
-    .product-feature .media{position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,5,5,.94) 4%,rgba(5,5,5,.48) 55%,rgba(5,5,5,.15)),url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=2400&q=88') center/cover no-repeat;transition:transform 1s ease}
-    .product-feature:hover .media{transform:scale(1.03)}
-    .product-content{position:relative;z-index:2;padding:70px 0;width:100%}
-    .product-content h3{font-size:clamp(70px,10vw,150px);line-height:.8;letter-spacing:-.07em;margin:10px 0 26px}
-    .product-content .lead{font-size:clamp(24px,2.3vw,38px);max-width:750px;line-height:1.08}
-    .product-content .meta{font:400 12px/1.5 var(--mono);color:#bebeb8;margin-top:25px}
 
-    /* caixinhas das marcas próprias — discretas, sem destaque */
-    .own-brands{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line)}
-    .own-brand{display:flex;flex-direction:column;gap:18px;min-height:210px;padding:40px 34px;background:#0b0b0b;transition:background .3s ease}
-    .own-brand:hover{background:#101010}
-    .own-brand__mark{height:30px;display:flex;align-items:center}
-    .own-brand__mark img{height:100%;width:auto;opacity:.9}
-    /* a marca do PLAY.O veio como render sobre parede cinza: o screen apaga o fundo
-       e sobra só o letreiro aceso */
-    .own-brand__mark--playo{overflow:hidden;width:70px;height:30px}
-    .own-brand__mark--playo img{width:108px;height:auto;max-width:none;margin:-17px 0 0 -17px;
-      mix-blend-mode:screen;filter:brightness(1.75) contrast(1.7) saturate(1.15);
-      -webkit-mask-image:radial-gradient(ellipse 60% 64% at 50% 50%,#000 46%,rgba(0,0,0,.55) 74%,transparent 100%);
-              mask-image:radial-gradient(ellipse 60% 64% at 50% 50%,#000 46%,rgba(0,0,0,.55) 74%,transparent 100%)}
-    .own-brand__mark--vazio{font:500 17px/1 var(--display);letter-spacing:-.02em;color:#cfcfc8}
-    .own-brand p{margin:0;font:400 14px/1.65 var(--display);color:#8f8f89;max-width:34ch}
-    .own-brand__tag{margin-top:auto;font:400 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:#55554f}
+    /* cards dos produtos próprios — cada um com a identidade da sua marca */
+    .own-brands{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,1.7vw,24px);margin-top:8px}
+    .own-brand{display:flex;flex-direction:column;gap:20px;padding:22px 22px 26px;border:1px solid var(--line);
+      border-radius:16px;background:#0b0b0b;transition:border-color .3s ease,transform .3s ease}
+    a.own-brand:hover{border-color:rgba(255,255,255,.3);transform:translateY(-3px)}
+    .own-brand__id{height:124px;border-radius:11px;display:grid;place-items:center;overflow:hidden;position:relative}
+    .own-brand__id img{width:auto;max-width:72%;height:auto}
+    .own-brand p{margin:0;font:400 14px/1.6 var(--display);color:#96968f}
+    .own-brand__tag{margin-top:auto;padding-top:6px;font:400 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:#5a5a54}
     a.own-brand:hover .own-brand__tag{color:var(--green)}
+
+    /* PING — azul da marca */
+    .own-brand--ping .own-brand__id{background:radial-gradient(120% 100% at 28% 22%,rgba(8,104,248,.34),transparent 62%),linear-gradient(158deg,#0a1730,#060b16);box-shadow:inset 0 0 0 1px rgba(8,104,248,.26)}
+    .own-brand--ping .own-brand__id img{max-width:60%}
+    /* PLAY.O — violeta da marca */
+    .own-brand--playo .own-brand__id{background:radial-gradient(120% 100% at 72% 26%,rgba(136,104,248,.34),transparent 62%),linear-gradient(158deg,#161034,#0a0818);box-shadow:inset 0 0 0 1px rgba(136,104,248,.28)}
+    /* Onboarding RH — identidade só simulada, para ocupar o lugar */
+    .own-brand--ob .own-brand__id{background:radial-gradient(120% 100% at 30% 24%,rgba(240,160,60,.26),transparent 62%),linear-gradient(158deg,#241a0e,#100b06);box-shadow:inset 0 0 0 1px rgba(240,160,60,.22)}
+    .ob-mark{display:flex;align-items:center;gap:11px}
+    .ob-mark i{display:block;width:34px;height:34px;border-radius:9px;background:#f0a03c;position:relative;flex:none}
+    .ob-mark i:before,.ob-mark i:after{content:"";position:absolute;left:9px;height:3px;border-radius:2px;background:#241a0e}
+    .ob-mark i:before{top:12px;width:16px}
+    .ob-mark i:after{top:19px;width:10px}
+    .ob-mark b{font:700 17px/1 var(--display);letter-spacing:-.03em;color:#f4e6d2}
+    .ob-mark b em{display:block;margin-top:4px;font:400 9px/1 var(--mono);letter-spacing:.22em;font-style:normal;color:#f0a03c}
+
     @media(max-width:860px){.own-brands{grid-template-columns:1fr}}
     .projects{padding:140px 0;background:var(--white);color:#090909}
     .projects .eyebrow{color:#111}
@@ -226,8 +228,7 @@
       .image-break{min-height:58svh}
       .service-row{grid-template-columns:1fr auto;padding:26px 0}
       .home-bento{grid-template-columns:1fr;grid-auto-rows:280px;border-radius:20px}.home-bento__card:nth-child(n){grid-column:auto;grid-row:auto;min-height:280px}.home-bento__caption{padding:24px}.home-bento__summary{max-height:120px;opacity:1;transform:none}.home-bento__link{opacity:1;transform:none}.home-bento__media img{filter:saturate(.9) brightness(.68)}
-      .product-feature{min-height:560px}
-      .footer-bottom{flex-direction:column}
+        .footer-bottom{flex-direction:column}
     }
     @media(prefers-reduced-motion:no-preference){body.poke-page-leaving .site-header{opacity:0;transform:translate3d(0,-14px,0);transition:opacity .18s ease,transform .22s cubic-bezier(.22,1,.36,1)}body.poke-page-leaving main{opacity:0;transform:translate3d(0,-12px,0) scale(.994);transition:opacity .2s ease,transform .24s cubic-bezier(.22,1,.36,1)}body.poke-page-leaving footer{opacity:0;transition:opacity .16s ease}}
     @media(prefers-reduced-motion:reduce){.masked-heading span{clip-path:none;opacity:1;transform:none;animation:none!important}.home-bento__card *{transition-duration:.01ms!important}.state--on,.beam,.hero-content{transition:none!important}}
@@ -323,27 +324,23 @@
   <section class="products">
     <div class="shell">
       <div class="section-title reveal"><div><span class="eyebrow">Produtos POKE</span><h2>Também criamos<br>coisas nossas.</h2></div><p>Algumas oportunidades que encontramos não terminam em um projeto. Elas viram produtos digitais próprios, pensados para ganhar escala.</p></div>
-      <a href="/produtos/ping/" class="product-feature reveal">
-        <div class="media" aria-hidden="true"></div>
-        <div class="product-content"><span class="eyebrow">Produto digital · POKE</span><h3>PING.</h3><div class="lead">O que importa, no momento certo.</div><div class="meta">Lembretes rápidos · Checklists · Extensão para navegador · Times</div></div>
-      </a>
-
       <div class="own-brands reveal">
-        <a class="own-brand" href="/produtos/ping/">
-          <span class="own-brand__mark"><img src="/assets/marcas/ping.png" alt="PING" /></span>
+        <a class="own-brand own-brand--ping" href="/produtos/ping/">
+          <span class="own-brand__id"><img src="/assets/marcas/ping.png" alt="PING" loading="lazy" /></span>
           <p>Lembretes rápidos e checklists no navegador, para o time não perder o que importa.</p>
           <span class="own-brand__tag">Ver produto →</span>
         </a>
-        <div class="own-brand">
-          <span class="own-brand__mark own-brand__mark--playo"><img src="/assets/marcas/playo.png" alt="PLAY.O" /></span>
+        <div class="own-brand own-brand--playo">
+          <span class="own-brand__id"><img src="/assets/marcas/playo-marca.png" alt="PLAY.O" loading="lazy" /></span>
           <p>Digital signage para redes e franquias. Você controla o que aparece em cada TV da operação, de qualquer lugar, em tempo real.</p>
           <span class="own-brand__tag">Em desenvolvimento</span>
         </div>
-        <div class="own-brand">
-          <span class="own-brand__mark own-brand__mark--vazio">Onboarding RH</span>
+        <div class="own-brand own-brand--ob">
+          <span class="own-brand__id"><span class="ob-mark"><i></i><b>Onboarding<em>RH</em></b></span></span>
           <p>Sistema gerencial das etapas de onboarding de novos colaboradores.</p>
-          <span class="own-brand__tag">Em desenvolvimento</span>
+          <span class="own-brand__tag">Marca ainda a definir</span>
         </div>
+      </div>
       </div>
     </div>
   </section>
