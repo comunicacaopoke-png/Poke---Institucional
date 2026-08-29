@@ -15,13 +15,10 @@
   <meta property="og:url" content="https://www.pokecomunicacao.com.br/" />
   <meta property="og:image" content="https://www.pokecomunicacao.com.br/assets/og-poke.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preload" as="image" href="/assets/hero/mesa-poke.jpg" fetchpriority="high" />
   <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preload" as="image" href="/Hero%20em%20camadas/Mulher.png" fetchpriority="high" />
-  <link rel="preload" as="image" href="/Hero%20em%20camadas/Montanha-1---COR.png" fetchpriority="high" />
-  <link rel="preload" as="image" href="/Hero%20em%20camadas/Montanha-2---COR.png" fetchpriority="high" />
-  <link rel="preload" as="image" href="/Hero%20em%20camadas/Montanha-3---COR.png" fetchpriority="high" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/assets/insights-carousel.css" />
   <style>
@@ -38,6 +35,8 @@
       --pad:clamp(20px,4vw,68px);
       --display:"Manrope",system-ui,sans-serif;
       --mono:"DM Mono",ui-monospace,monospace;
+      /* posição e alcance da luz do hero */
+      --lx:56%; --ly:52%; --lr:clamp(190px,25vw,440px);
     }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
@@ -60,43 +59,44 @@
     .nav-cta{display:inline-flex;align-items:center;gap:12px;background:var(--green);color:#060606;padding:13px 18px;border-radius:999px;font:500 12px/1 var(--mono);text-transform:uppercase;letter-spacing:.03em}
     .menu-btn{display:none;background:none;border:0;color:#fff;font:400 14px var(--mono)}
 
+    /* ===== HERO: mesa no escuro, o cursor é a luz ===== */
     .hero{height:155svh;min-height:860px;position:relative;background:#02050b}
-    .hero-stage{position:sticky;top:0;height:100svh;min-height:650px;overflow:hidden;isolation:isolate;background:#02050b}
-    .hero-world{position:absolute;z-index:1;left:50%;top:50%;width:max(100%,150svh);aspect-ratio:1536/1024;transform:translate(-50%,-50%) scale(1.13)}
-    .parallax-layer{position:absolute;inset:0;width:100%;height:100%;max-width:none;transform:translate3d(0,var(--layer-y,0px),0);will-change:transform}
-    .mountain-plane{pointer-events:none}
-    .mountain-plane--back{z-index:1}.mountain-plane--middle{z-index:2}.mountain-plane--front{z-index:3}
-    .mountain-layer{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:fill}
-    /* The supplied PNGs have a dark anti-aliased matte at their transparent edge.
-       A tiny feather on the two distant cuts removes that hard seam without softening the foreground. */
-    .mountain-plane--back .mountain-layer{transform:scale(1.003);filter:blur(.28px) contrast(.99)}
-    .mountain-plane--middle .mountain-layer{transform:scale(1.005);filter:blur(.55px) contrast(.985)}
-    .mountain-layer--off{z-index:1}
-    .mountain-layer--on{z-index:2;opacity:0;transition:opacity 1.35s cubic-bezier(.16,1,.3,1);filter:drop-shadow(0 0 7px rgba(147,196,76,.18));will-change:opacity}
-    .mountain-plane--back .mountain-layer--on{filter:blur(.28px) contrast(.99) drop-shadow(0 0 7px rgba(147,196,76,.18))}
-    .mountain-plane--middle .mountain-layer--on{filter:blur(.55px) contrast(.985) drop-shadow(0 0 7px rgba(147,196,76,.18))}
-    .mountain-plane--front .mountain-layer--on,.mountain-plane--middle .mountain-layer--on,.mountain-plane--back .mountain-layer--on{transition-delay:0s}
-    .hero-stage.is-powered .mountain-layer--on{opacity:1}
-    .hero-light{position:absolute;z-index:6;left:84%;top:74%;width:min(60vw,900px);aspect-ratio:1;pointer-events:none;opacity:0;transform:translate3d(-50%,-50%,0) scale(.72);background:radial-gradient(circle,rgba(222,255,129,.58) 0,rgba(154,204,78,.2) 17%,rgba(105,144,57,.075) 37%,transparent 70%);filter:blur(15px);contain:paint;will-change:opacity,transform;transition:opacity 1.15s ease,transform 2.35s cubic-bezier(.16,1,.3,1)}
-    .hero-stage.is-powered .hero-light{opacity:.92;transform:translate3d(-50%,-50%,0) scale(1.28)}
-    .hero-character{z-index:5;pointer-events:none;backface-visibility:hidden}
-    .hero-character img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:fill}
-    .hero-person{z-index:1}
-    .hero-mask{z-index:2;opacity:0;--mask-x:40%;--mask-y:52%;-webkit-mask-image:radial-gradient(circle clamp(108px,12vw,196px) at var(--mask-x) var(--mask-y),rgba(0,0,0,.88) 0%,rgba(0,0,0,.8) 22%,rgba(0,0,0,.48) 55%,rgba(0,0,0,.14) 80%,transparent 100%);mask-image:radial-gradient(circle clamp(108px,12vw,196px) at var(--mask-x) var(--mask-y),rgba(0,0,0,.88) 0%,rgba(0,0,0,.8) 22%,rgba(0,0,0,.48) 55%,rgba(0,0,0,.14) 80%,transparent 100%);transition:opacity .32s ease-out;will-change:opacity;backface-visibility:hidden}
-    .hero-stage.is-mask-visible .hero-mask{opacity:1}
-    .mask-hit{position:absolute;z-index:3;left:13%;top:27%;width:49%;height:73%;pointer-events:auto;cursor:default}
-    .hero-vignette{position:absolute;z-index:8;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(1,4,10,.72) 0%,rgba(1,4,10,.48) 31%,rgba(1,4,10,.16) 54%,transparent 78%),linear-gradient(0deg,rgba(1,3,7,.34) 0%,transparent 43%)}
+    .hero-stage{position:sticky;top:0;height:100svh;min-height:650px;overflow:hidden;isolation:isolate;background:#02050b;cursor:none}
+    .hero-world{position:absolute;z-index:1;inset:0;overflow:hidden}
+
+    /* a mesma foto em dois estados: apagada e acesa */
+    .scene{position:absolute;inset:0}
+    .scene .state{position:absolute;inset:0;background:url('/assets/hero/mesa-poke.jpg') 50% 50%/cover no-repeat}
+    .state--off{filter:brightness(.44) saturate(.18) contrast(1.12)}
+    .scene .veu{position:absolute;z-index:2;inset:0;background:linear-gradient(180deg,rgba(6,14,32,.2),rgba(2,5,14,.34))}
+    .state--on{z-index:3;opacity:0;transition:opacity .5s ease;filter:brightness(1.32) saturate(1.3) contrast(1.04);
+      -webkit-mask-image:radial-gradient(circle var(--lr) at var(--lx) var(--ly),#000 0 12%,rgba(0,0,0,.94) 30%,rgba(0,0,0,.72) 48%,rgba(0,0,0,.4) 66%,rgba(0,0,0,.14) 84%,transparent 100%);
+              mask-image:radial-gradient(circle var(--lr) at var(--lx) var(--ly),#000 0 12%,rgba(0,0,0,.94) 30%,rgba(0,0,0,.72) 48%,rgba(0,0,0,.4) 66%,rgba(0,0,0,.14) 84%,transparent 100%)}
+    .hero-stage.is-live .state--on{opacity:1}
+    /* o facho: é ele que faz parecer luz, e não recorte */
+    .beam{position:absolute;z-index:5;inset:0;pointer-events:none;mix-blend-mode:screen;opacity:0;transition:opacity .5s ease;
+      background:radial-gradient(circle calc(var(--lr)*1.05) at var(--lx) var(--ly),rgba(255,247,219,.22) 0%,rgba(213,255,0,.11) 32%,rgba(120,160,60,.05) 56%,transparent 78%)}
+    .hero-stage.is-live .beam{opacity:1}
+    .hero-vignette{position:absolute;z-index:8;inset:0;pointer-events:none;
+      background:linear-gradient(90deg,rgba(1,4,10,.8) 0%,rgba(1,4,10,.52) 28%,rgba(1,4,10,.16) 54%,transparent 78%),linear-gradient(0deg,rgba(1,3,7,.34) 0%,transparent 43%)}
     .hero-grain{display:none}
-    .hero-content{position:relative;z-index:25;width:100%;height:100%;padding-top:clamp(115px,17vh,170px);padding-bottom:clamp(34px,6vh,76px);display:flex;flex-direction:column;justify-content:flex-start;align-items:flex-end;pointer-events:none;opacity:0;transform:translateY(18px);transition:opacity .85s ease,transform .85s ease}
+    /* a lanterna no lugar do cursor */
+    .torch{position:fixed;z-index:40;left:0;top:0;width:24px;height:24px;margin:-12px 0 0 -12px;border:1px solid rgba(213,255,0,.7);border-radius:50%;pointer-events:none;opacity:0;transition:opacity .3s ease;box-shadow:0 0 22px rgba(213,255,0,.35)}
+    .torch.on{opacity:1}
+    .torch:after{content:"";position:absolute;inset:9px;border-radius:50%;background:var(--green)}
+    @media (hover:none){.hero-stage{cursor:auto}.torch{display:none}}
+
+    /* texto: o mesmo de sempre, agora alinhado à esquerda */
+    .hero-content{position:relative;z-index:25;width:100%;height:100%;padding-top:clamp(115px,17vh,170px);padding-bottom:clamp(34px,6vh,76px);display:flex;flex-direction:column;justify-content:flex-start;align-items:flex-start;pointer-events:none;opacity:0;transform:translateY(18px);transition:opacity .85s ease,transform .85s ease}
     .hero-stage.is-copy-visible .hero-content{opacity:1;transform:none}
     .hero-content a{pointer-events:auto}
-    .hero-topline{width:min(36vw,520px);display:flex;flex-direction:column;align-items:flex-end;gap:18px;margin-bottom:clamp(34px,5vw,68px);text-align:right}
-    .hero-note{max-width:410px;font:400 15px/1.7 var(--display);color:#e2e5df;text-shadow:0 2px 18px rgba(0,0,0,.45)}
-    .hero h1{width:min(36vw,520px);font-size:clamp(52px,6.5vw,110px);line-height:.8;letter-spacing:-.078em;margin:0;text-align:right;text-transform:uppercase;font-weight:700;text-shadow:0 5px 30px rgba(0,0,0,.42)}
+    .hero-topline{width:min(36vw,520px);display:flex;flex-direction:column;align-items:flex-start;gap:18px;margin-bottom:clamp(34px,5vw,68px);text-align:left}
+    .hero-note{max-width:410px;font:400 15px/1.7 var(--display);color:#e2e5df;text-shadow:0 2px 18px rgba(0,0,0,.55)}
+    .hero h1{width:min(36vw,520px);font-size:clamp(52px,6.5vw,110px);line-height:.8;letter-spacing:-.078em;margin:0;text-align:left;text-transform:uppercase;font-weight:700;text-shadow:0 5px 30px rgba(0,0,0,.5)}
     .hero h1 span{display:block;color:var(--green)}
-    .hero-bottom{width:min(36vw,520px);display:grid;grid-template-columns:1fr;gap:26px;align-items:end;margin-top:38px;text-align:right}
-    .hero-copy{font-size:clamp(21px,2.25vw,37px);line-height:1.08;max-width:720px;letter-spacing:-.03em;text-shadow:0 3px 18px rgba(0,0,0,.46)}
-    .hero-actions{display:flex;gap:14px;justify-content:flex-end;align-items:center}
+    .hero-bottom{width:min(36vw,520px);display:grid;grid-template-columns:1fr;gap:26px;align-items:end;margin-top:38px;text-align:left}
+    .hero-copy{font-size:clamp(21px,2.25vw,37px);line-height:1.08;max-width:720px;letter-spacing:-.03em;text-shadow:0 3px 18px rgba(0,0,0,.55)}
+    .hero-actions{display:flex;gap:14px;justify-content:flex-start;align-items:center}
     .text-link{display:inline-flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.35);font:400 13px var(--mono)}
     .text-link:hover{color:var(--green);border-color:var(--green)}
     .dot{width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block}
@@ -212,7 +212,7 @@
       .footer-bottom{flex-direction:column}
     }
     @media(prefers-reduced-motion:no-preference){body.poke-page-leaving .site-header{opacity:0;transform:translate3d(0,-14px,0);transition:opacity .18s ease,transform .22s cubic-bezier(.22,1,.36,1)}body.poke-page-leaving main{opacity:0;transform:translate3d(0,-12px,0) scale(.994);transition:opacity .2s ease,transform .24s cubic-bezier(.22,1,.36,1)}body.poke-page-leaving footer{opacity:0;transition:opacity .16s ease}}
-    @media(prefers-reduced-motion:reduce){.masked-heading span{clip-path:none;opacity:1;transform:none;animation:none!important}.home-bento__card *{transition-duration:.01ms!important}.mountain-layer--on,.hero-light,.hero-mask,.hero-content{transition:none!important}}
+    @media(prefers-reduced-motion:reduce){.masked-heading span{clip-path:none;opacity:1;transform:none;animation:none!important}.home-bento__card *{transition-duration:.01ms!important}.state--on,.beam,.hero-content{transition:none!important}}
   </style>
   <script type="application/ld+json">
   {
@@ -235,27 +235,14 @@
   <section class="hero" id="hero">
     <div class="hero-stage" id="heroStage">
       <div class="hero-world">
-        <div class="mountain-plane mountain-plane--back parallax-layer" data-depth=".07" aria-hidden="true">
-          <img class="mountain-layer mountain-layer--off" src="Hero em camadas/Montanha-3---SEM-COR.png" alt="" fetchpriority="high" />
-          <img class="mountain-layer mountain-layer--on" src="Hero em camadas/Montanha-3---COR.png" alt="" fetchpriority="high" />
-        </div>
-        <div class="mountain-plane mountain-plane--middle parallax-layer" data-depth=".18" aria-hidden="true">
-          <img class="mountain-layer mountain-layer--off" src="Hero em camadas/Montanha-2---SEM-COR.png" alt="" />
-          <img class="mountain-layer mountain-layer--on" src="Hero em camadas/Montanha-2---COR.png" alt="" />
-        </div>
-        <div class="mountain-plane mountain-plane--front parallax-layer" data-depth=".44" aria-hidden="true">
-          <img class="mountain-layer mountain-layer--off" src="Hero em camadas/Montanha-1---SEM-COR.png" alt="" />
-          <img class="mountain-layer mountain-layer--on" src="Hero em camadas/Montanha-1---COR.png" alt="" />
-        </div>
-        <div class="hero-character parallax-layer" data-depth=".22" aria-hidden="true">
-          <img class="hero-person" src="Hero em camadas/Mulher.png" alt="" />
-          <img class="hero-mask" id="heroMask" src="Hero em camadas/Máscara----mulher.png?v=00e8915c" alt="" />
-          <div class="mask-hit" id="maskHit"></div>
+        <div class="scene">
+          <div class="state state--off"></div>
+          <div class="veu"></div>
+          <div class="state state--on"></div>
         </div>
       </div>
-      <div class="hero-light" aria-hidden="true"></div>
+      <div class="beam" aria-hidden="true"></div>
       <div class="hero-vignette" aria-hidden="true"></div>
-      <div class="hero-grain" aria-hidden="true"></div>
 
       <div class="shell hero-content">
         <div class="hero-topline reveal">
@@ -269,6 +256,7 @@
         </div>
       </div>
     </div>
+    <div class="torch" id="torch"></div>
   </section>
 
   <section class="intro" id="intro">
@@ -401,43 +389,12 @@
   const menu=document.getElementById('menu');
   const hero=document.getElementById('hero');
   const heroStage=document.getElementById('heroStage');
-  const parallaxLayers=hero?[...hero.querySelectorAll('[data-depth]')]:[];
-  const maskHit=document.getElementById('maskHit');
-  const heroMask=document.getElementById('heroMask');
   const prefersReducedMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(menuButton && menu){menuButton.addEventListener('click',()=>{const open=menu.classList.toggle('is-open');menuButton.setAttribute('aria-expanded',String(open));menuButton.textContent=open?'FECHAR':'MENU'});}
 
   let scrollFrame;
-  let parallaxFrame;
-  let parallaxTarget=0;
-  let parallaxRendered=0;
-  let parallaxLastTime=0;
-  const heroProgress=()=>{
-    const travel=Math.max(hero.offsetHeight-innerHeight,1);
-    return Math.min(1,Math.max(0,-hero.getBoundingClientRect().top/travel));
-  };
-  const renderParallax=(time)=>{
-    parallaxFrame=0;
-    const elapsed=Math.min((time-parallaxLastTime)/1000,.05)||0;
-    parallaxLastTime=time;
-    // Time-based damping keeps the movement fluid at any screen refresh rate
-    // without leaving a visible delayed mountain behind the scroll position.
-    const smoothing=1-Math.exp(-18*elapsed);
-    parallaxRendered+=(parallaxTarget-parallaxRendered)*smoothing;
-    if(Math.abs(parallaxTarget-parallaxRendered)<.0001) parallaxRendered=parallaxTarget;
-    const scrollDistance=innerHeight*.15;
-    parallaxLayers.forEach(layer=>{
-      const depth=Number(layer.dataset.depth)||0;
-      layer.style.setProperty('--layer-y',`${-(parallaxRendered*scrollDistance*depth).toFixed(3)}px`);
-    });
-    if(parallaxRendered!==parallaxTarget) parallaxFrame=requestAnimationFrame(renderParallax);
-  };
   const updateScrollEffects=()=>{
     header.classList.toggle('scrolled',scrollY>30);
-    if(hero && heroStage && !prefersReducedMotion){
-      parallaxTarget=heroProgress();
-      if(!parallaxFrame) parallaxFrame=requestAnimationFrame(renderParallax);
-    }
   };
   addEventListener('scroll',()=>{
     if(!scrollFrame) scrollFrame=requestAnimationFrame(()=>{scrollFrame=0;updateScrollEffects()});
@@ -445,54 +402,49 @@
   updateScrollEffects();
 
   if(heroStage){
-    if(maskHit && heroMask){
-      let maskFrame=0;
-      let pendingMaskEvent;
-      const paintMask=()=>{
-        maskFrame=0;
-        const event=pendingMaskEvent;
-        if(!event) return;
-        const bounds=heroMask.getBoundingClientRect();
-        const x=((event.clientX-bounds.left)/bounds.width)*100;
-        const y=((event.clientY-bounds.top)/bounds.height)*100;
-        heroMask.style.setProperty('--mask-x',`${Math.max(0,Math.min(100,x)).toFixed(2)}%`);
-        heroMask.style.setProperty('--mask-y',`${Math.max(0,Math.min(100,y)).toFixed(2)}%`);
-        heroStage.classList.add('is-mask-visible');
-      };
-      const revealMask=(event)=>{
-        pendingMaskEvent=event;
-        if(!maskFrame) maskFrame=requestAnimationFrame(paintMask);
-      };
-      const hideMask=()=>{
-        pendingMaskEvent=null;
-        if(maskFrame) cancelAnimationFrame(maskFrame);
-        maskFrame=0;
-        heroStage.classList.remove('is-mask-visible');
-      };
-      maskHit.addEventListener('pointerenter',revealMask);
-      maskHit.addEventListener('pointermove',revealMask);
-      maskHit.addEventListener('pointerleave',hideMask);
-    }
-
-    let lightingStarted=false;
-    const startAutomaticLighting=()=>{
-      if(lightingStarted) return;
-      lightingStarted=true;
-      heroStage.classList.add('is-powered');
-      setTimeout(()=>heroStage.classList.add('is-copy-visible'),prefersReducedMotion?0:1100);
+    // O cursor vira lanterna: revela a camada acesa da mesma foto.
+    // Parado, a luz passeia sozinha — no toque o efeito roda sem interação.
+    const torch=document.getElementById('torch');
+    const target={x:56,y:52};
+    const current={x:56,y:52};
+    let idle=true,drift=0,pointerX=0,pointerY=0;
+    const powerOn=()=>{heroStage.classList.add('is-live');if(torch)torch.classList.add('on')};
+    const frame=()=>{
+      current.x+=(target.x-current.x)*.13;
+      current.y+=(target.y-current.y)*.13;
+      heroStage.style.setProperty('--lx',`${current.x.toFixed(2)}%`);
+      heroStage.style.setProperty('--ly',`${current.y.toFixed(2)}%`);
+      if(idle && !prefersReducedMotion){
+        drift+=.0045;
+        target.x=58+Math.cos(drift)*20;
+        target.y=52+Math.sin(drift*1.5)*15;
+        const bounds=heroStage.getBoundingClientRect();
+        pointerX=bounds.left+bounds.width*current.x/100;
+        pointerY=bounds.top+bounds.height*current.y/100;
+      }
+      if(torch) torch.style.transform=`translate(${pointerX}px,${pointerY}px)`;
+      requestAnimationFrame(frame);
     };
-    const waitForHeroImage=(image)=>new Promise(resolve=>{
-      const finish=()=>image.decode?image.decode().catch(()=>{}).then(resolve):resolve();
-      if(image.complete) finish();
-      else {image.addEventListener('load',finish,{once:true});image.addEventListener('error',resolve,{once:true});}
-    });
-    const heroCriticalImages=[
-      heroStage.querySelector('.hero-person'),
-      ...heroStage.querySelectorAll('.mountain-layer--on')
-    ].filter(Boolean);
-    const heroImagesReady=Promise.all(heroCriticalImages.map(waitForHeroImage));
-    const heroSafetyNet=new Promise(resolve=>setTimeout(resolve,2800));
-    Promise.race([heroImagesReady,heroSafetyNet]).then(()=>requestAnimationFrame(()=>setTimeout(startAutomaticLighting,prefersReducedMotion?0:120)));
+    const moveLight=(event)=>{
+      const bounds=heroStage.getBoundingClientRect();
+      idle=false;
+      target.x=((event.clientX-bounds.left)/bounds.width)*100;
+      target.y=((event.clientY-bounds.top)/bounds.height)*100;
+      pointerX=event.clientX;pointerY=event.clientY;
+      powerOn();
+    };
+    heroStage.addEventListener('pointermove',moveLight);
+    heroStage.addEventListener('pointerdown',moveLight);
+    heroStage.addEventListener('pointerenter',powerOn);
+    heroStage.addEventListener('pointerleave',()=>{idle=true});
+    requestAnimationFrame(frame);
+
+    const heroImage=new Image();
+    const revealCopy=()=>{powerOn();heroStage.classList.add('is-copy-visible')};
+    heroImage.addEventListener('load',revealCopy,{once:true});
+    heroImage.addEventListener('error',revealCopy,{once:true});
+    heroImage.src='/assets/hero/mesa-poke.jpg';
+    setTimeout(revealCopy,2200);
   }
 
   const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}}),{threshold:.12});
