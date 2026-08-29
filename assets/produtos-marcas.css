@@ -1,0 +1,125 @@
+/* ============================================================
+   Dobras de produto — cada uma fala na identidade da sua marca.
+   PING e PLAY.O seguem os tokens oficiais dos produtos.
+   Onboarding RH ainda não tem marca: a identidade aqui é simulada.
+   ============================================================ */
+
+.marca{position:relative;isolation:isolate;padding:clamp(84px,10vw,140px) 0;overflow:hidden}
+.marca__grid{display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(40px,5vw,86px);align-items:center}
+.marca__eyebrow{display:block;margin:0 0 18px;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.marca__logo{display:block;height:34px;width:auto;margin:0 0 26px}
+.marca h2{margin:0 0 20px}
+.marca__lead{margin:0 0 30px;max-width:46ch}
+.marca__acoes{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.marca__btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;
+  padding:12px 20px;border:1px solid transparent;border-radius:10px;font-weight:600;font-size:14px;
+  text-decoration:none;cursor:pointer;transition:background .2s,border-color .2s,transform .2s,box-shadow .2s}
+.marca__nota{margin:26px 0 0;font-size:12px;letter-spacing:.02em}
+
+/* ---------- 1 · PING — identidade clara, azul #016AF9 ---------- */
+.marca--ping{background:#F5F8FC;color:#111827;font-family:Inter,system-ui,sans-serif}
+.marca--ping .marca__eyebrow{color:#016AF9}
+/* o PNG da marca é branco: aplicado sobre o azul primário */
+.marca--ping .marca__placa{display:inline-flex;align-items:center;margin:0 0 26px;padding:11px 18px;
+  border-radius:12px;background:#016AF9;box-shadow:0 6px 18px rgba(1,106,249,.22)}
+.marca--ping .marca__placa img{height:22px;width:auto;display:block}
+.marca--ping h2{font:700 clamp(36px,4.3vw,60px)/1.05 Sora,Inter,sans-serif;letter-spacing:-.05em;color:#111827}
+.marca--ping .marca__lead{font-size:17px;line-height:1.7;color:#667085}
+.marca--ping .marca__btn--1{background:#016AF9;color:#fff;box-shadow:0 4px 10px rgba(1,106,249,.14)}
+.marca--ping .marca__btn--1:hover{background:#005DE0;transform:translateY(-1px)}
+.marca--ping .marca__btn--2{background:#fff;border-color:#D9E2EC;color:#111827}
+.marca--ping .marca__btn--2:hover{background:#F8FBFF;border-color:#BFD2E8}
+.marca--ping .marca__nota{color:#667085}
+
+/* o mock: a linguagem de tela do próprio PING */
+.ping-ui{background:#fff;border:1px solid #E3EAF3;border-radius:16px;padding:22px;
+  box-shadow:0 20px 50px rgba(16,40,80,.08)}
+.ping-ui__topo{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.ping-ui__topo b{font:700 15px/1 Sora,Inter,sans-serif;letter-spacing:-.02em;color:#111827}
+.ping-ui__topo span{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#667085}
+.ping-item{display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid #EDF2F8}
+.ping-item i{flex:none;width:19px;height:19px;border-radius:50%;border:2px solid #D9E2EC;position:relative}
+.ping-item--ok i{background:#016AF9;border-color:#016AF9}
+.ping-item--ok i:after{content:"";position:absolute;left:5px;top:2px;width:5px;height:9px;
+  border:2px solid #fff;border-top:0;border-left:0;transform:rotate(42deg)}
+.ping-item p{margin:0;font-size:14.5px;line-height:1.4;color:#111827}
+.ping-item--ok p{color:#98A2B3;text-decoration:line-through}
+.ping-item small{margin-left:auto;flex:none;font-size:11px;font-weight:600;color:#667085;
+  background:#EAF3FF;border-radius:99px;padding:5px 9px}
+.ping-ui__novo{margin-top:16px;display:inline-flex;align-items:center;gap:7px;font-size:13px;
+  font-weight:600;color:#016AF9}
+
+/* ---------- 2 · PLAY.O — void #07070C, violeta #6C63FF ---------- */
+.marca--playo{background:#07070C;color:#EEEEF5;font-family:Inter,system-ui,sans-serif}
+.marca--playo:before{content:"";position:absolute;z-index:-1;inset:-30% 30% 40% -20%;
+  background:radial-gradient(closest-side,rgba(108,99,255,.13),transparent);pointer-events:none}
+.marca--playo .marca__logo{height:40px;filter:drop-shadow(0 0 24px rgba(108,99,255,.20))}
+.marca--playo .marca__eyebrow{color:#6C63FF;font-family:"JetBrains Mono",ui-monospace,monospace;font-weight:500}
+.marca--playo h2{font:700 clamp(34px,4.1vw,56px)/1.08 Inter,sans-serif;letter-spacing:-.04em;color:#EEEEF5}
+.marca--playo .marca__lead{font-size:17px;line-height:1.7;color:#9090A8}
+.marca--playo .marca__btn--1{background:#6C63FF;color:#fff;box-shadow:0 0 24px rgba(108,99,255,.20)}
+.marca--playo .marca__btn--1:hover{background:#8B7FFF;transform:translateY(-1px)}
+.marca--playo .marca__btn--2{border-color:rgba(255,255,255,.07);color:#EEEEF5}
+.marca--playo .marca__btn--2:hover{border-color:rgba(108,99,255,.22)}
+.marca--playo .marca__nota{color:#9090A8;font-family:"JetBrains Mono",ui-monospace,monospace;letter-spacing:.04em}
+
+/* o mock: painel de controle das telas */
+.playo-ui{background:#0B0B12;border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:18px;
+  transition:border-color .5s cubic-bezier(.16,1,.3,1)}
+.playo-ui__topo{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;
+  font:500 11px/1 "JetBrains Mono",ui-monospace,monospace;letter-spacing:.08em;color:#9090A8}
+.playo-ui__topo b{color:#EEEEF5;font-weight:500}
+.playo-ui__no-ar{display:inline-flex;align-items:center;gap:7px;color:#6C63FF}
+.playo-ui__no-ar:before{content:"";width:6px;height:6px;border-radius:50%;background:#6C63FF;
+  box-shadow:0 0 10px rgba(108,99,255,.8);animation:playoPulso 2.4s ease-in-out infinite}
+@keyframes playoPulso{0%,100%{opacity:.35}50%{opacity:1}}
+.playo-telas{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.playo-tela{aspect-ratio:16/10;border-radius:8px;background:#0E0E16;border:1px solid rgba(255,255,255,.07);
+  display:flex;align-items:flex-end;padding:9px;transition:border-color .5s cubic-bezier(.16,1,.3,1),background .5s}
+.playo-tela span{font:500 9px/1 "JetBrains Mono",ui-monospace,monospace;letter-spacing:.08em;color:#5C5C72}
+.playo-tela--on{border-color:rgba(108,99,255,.22);background:#0F0D1D;box-shadow:0 0 24px rgba(108,99,255,.20)}
+.playo-tela--on span{color:#8B7FFF}
+.playo-ui__rodape{display:flex;justify-content:space-between;margin-top:16px;padding-top:14px;
+  border-top:1px solid rgba(255,255,255,.07);
+  font:500 10px/1 "JetBrains Mono",ui-monospace,monospace;letter-spacing:.08em;color:#5C5C72}
+
+/* ---------- 3 · Onboarding RH — identidade SIMULADA ---------- */
+.marca--ob{background:#14100C;color:#F6EFE4;font-family:Manrope,system-ui,sans-serif}
+.marca--ob:before{content:"";position:absolute;z-index:-1;inset:-25% -15% 45% 35%;
+  background:radial-gradient(closest-side,rgba(240,160,60,.12),transparent);pointer-events:none}
+.marca--ob .marca__eyebrow{color:#F0A03C}
+.marca--ob h2{font:800 clamp(34px,4.1vw,56px)/1.06 Manrope,sans-serif;letter-spacing:-.045em;color:#F6EFE4}
+.marca--ob .marca__lead{font-size:17px;line-height:1.7;color:#A79981}
+.marca--ob .marca__btn--1{background:#F0A03C;color:#1A1206}
+.marca--ob .marca__btn--1:hover{background:#FFB65C;transform:translateY(-1px)}
+.marca--ob .marca__nota{color:#8A7C67}
+/* a marca provisória */
+.ob-logo{display:flex;align-items:center;gap:12px;margin-bottom:26px}
+.ob-logo i{flex:none;width:38px;height:38px;border-radius:10px;background:#F0A03C;position:relative}
+.ob-logo i:before,.ob-logo i:after{content:"";position:absolute;left:10px;height:3px;border-radius:2px;background:#1A1206}
+.ob-logo i:before{top:13px;width:18px}
+.ob-logo i:after{top:21px;width:11px}
+.ob-logo b{font:800 19px/1 Manrope,sans-serif;letter-spacing:-.03em;color:#F6EFE4}
+.ob-logo b em{display:block;margin-top:5px;font:400 9px/1 "DM Mono",ui-monospace,monospace;
+  letter-spacing:.24em;font-style:normal;color:#F0A03C}
+/* o mock: a trilha de etapas */
+.ob-ui{background:#1C170F;border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:22px}
+.ob-ui__topo{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:6px;
+  font:400 11px/1 "DM Mono",ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase;color:#8A7C67}
+.ob-ui__topo b{font:800 15px/1 Manrope,sans-serif;letter-spacing:-.02em;color:#F6EFE4}
+.ob-etapa{display:flex;align-items:center;gap:14px;padding:15px 0;border-top:1px solid rgba(255,255,255,.07)}
+.ob-etapa i{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;
+  font:700 11px/1 Manrope,sans-serif;border:1px solid rgba(240,160,60,.35);color:#F0A03C}
+.ob-etapa--ok i{background:#F0A03C;border-color:#F0A03C;color:#1A1206}
+.ob-etapa p{margin:0;font-size:14.5px;line-height:1.35;color:#F6EFE4}
+.ob-etapa small{margin-left:auto;flex:none;font:400 10px/1 "DM Mono",ui-monospace,monospace;
+  letter-spacing:.08em;text-transform:uppercase;color:#8A7C67}
+.ob-etapa--ok small{color:#F0A03C}
+.ob-ui__barra{height:4px;border-radius:99px;background:rgba(255,255,255,.07);margin-top:18px;overflow:hidden}
+.ob-ui__barra i{display:block;height:100%;width:62%;border-radius:99px;background:#F0A03C}
+
+@media(max-width:900px){
+  .marca__grid{grid-template-columns:1fr;gap:38px}
+  .playo-telas{grid-template-columns:repeat(2,1fr)}
+}
+@media(prefers-reduced-motion:reduce){.playo-ui__no-ar:before{animation:none}}
