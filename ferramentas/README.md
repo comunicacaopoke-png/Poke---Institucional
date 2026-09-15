@@ -1,9 +1,8 @@
 # Ferramentas POKE
 
-Esta rota é o hub interno para as ferramentas POKE. Ela foi construída como página estática porque o site institucional é hospedado em GitHub Pages.
+Hub estático das ferramentas POKE, publicado com o site institucional no GitHub Pages.
 
-## Antes de publicar em `main`
+- `/ferramentas/` — cards das ferramentas.
+- `/ferramentas/poke-cut/` — POKE CUT (prévia). Aplicação 100% client-side: os arquivos são lidos no navegador de quem usa e nunca são enviados a um servidor. Fonte: `poke-cut-preview/dist/index.html` do projeto Editor de vídeos.
 
-GitHub Pages não oferece autenticação por rota e não deve ser usado como proteção do POKE CUT. A publicação da rota `/ferramentas/` requer uma camada de acesso na borda (por exemplo, Cloudflare Access) ou a migração desse hub para um host com autenticação server-side.
-
-O card aponta para a prévia privada do POKE CUT. O acesso à ferramenta é autenticado no host da aplicação, não pelo GitHub Pages.
+As páginas usam `noindex,nofollow`. GitHub Pages não autentica por rota: não publique aqui nada que dependa de segredo ou de dados privados no servidor.
