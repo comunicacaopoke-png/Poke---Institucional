@@ -1,0 +1,19 @@
+.tools-page{background:var(--black)}
+.tools-header__label,.tools-header__status{margin:0;font:500 10px/1 var(--mono);letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+.tools-header__status{display:flex;align-items:center;gap:8px;color:#d7d7d1}.tools-header__status i,.tool-card__state i{display:block;width:7px;height:7px;background:var(--green)}
+.tools-hero{padding:clamp(105px,14vw,180px) 0 clamp(72px,10vw,130px);border-bottom:1px solid var(--line)}
+.tools-hero__grid{display:grid;grid-template-columns:1.1fr .55fr;gap:clamp(35px,8vw,120px);align-items:end;margin-top:28px}
+.tools-hero h1{margin:0;font-size:clamp(68px,12vw,184px);line-height:.75;letter-spacing:-.09em;text-transform:uppercase}.tools-hero h1 span{color:var(--green)}
+.tools-hero p{max-width:460px;margin:0 0 5px;color:#d4d4ce;font-size:clamp(18px,1.8vw,27px);line-height:1.32;letter-spacing:-.028em}
+.tools-index{padding:clamp(58px,8vw,110px) 0 clamp(94px,12vw,160px);background:var(--carbon)}
+.tools-index__head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.tools-index__head .eyebrow{margin:0}.tools-index__count{font:400 10px var(--mono);color:var(--muted);letter-spacing:.1em}
+.tool-card{position:relative;overflow:hidden;border:1px solid rgba(213,255,0,.7);background:var(--green);color:#070707}
+.tool-card:before{content:"";position:absolute;inset:auto -11% -67% auto;width:min(680px,65vw);aspect-ratio:1;background:url('/assets/poke-p-oficial.png') center/contain no-repeat;opacity:.16;transform:rotate(-16deg)}
+.tool-card>*{position:relative;z-index:1}.tool-card__topline,.tool-card__footer{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:17px 20px;border-bottom:1px solid rgba(0,0,0,.24);font:500 10px var(--mono);letter-spacing:.1em;text-transform:uppercase}
+.tool-card__footer{border-top:1px solid rgba(0,0,0,.24);border-bottom:0;color:#333a05}.tool-card__state{display:flex;align-items:center;gap:8px}.tool-card__state i{background:#070707}.tool-card__body{display:grid;grid-template-columns:1fr .72fr;gap:clamp(28px,8vw,120px);min-height:430px;padding:clamp(35px,6vw,75px) clamp(22px,4vw,62px);align-items:end}
+.tool-card__kicker{margin:0 0 16px;font:500 11px var(--mono);letter-spacing:.1em}.tool-card h2{margin:0;font-size:clamp(76px,13vw,186px);line-height:.67;letter-spacing:-.105em}.tool-card h2 span{color:#f7f7f2;text-shadow:1px 0 rgba(0,0,0,.18)}
+.tool-card__copy>p{max-width:485px;margin:0;font-size:clamp(17px,1.6vw,24px);line-height:1.36;letter-spacing:-.025em}.tool-card dl{display:grid;gap:12px;margin:38px 0 0}.tool-card dl div{display:flex;justify-content:space-between;gap:18px;padding-top:10px;border-top:1px solid rgba(0,0,0,.3);font:400 9px/1.4 var(--mono);letter-spacing:.06em}.tool-card dt{color:#4e5e09}.tool-card dd{margin:0;text-align:right}.tool-card__waiting{display:inline-flex;align-items:center;gap:10px;color:#070707}.tool-card__waiting b{font-size:17px}
+.tools-empty{margin:24px 0 0;padding-top:18px;border-top:1px solid var(--line);color:#898981;font:400 10px/1.5 var(--mono);letter-spacing:.07em;text-transform:uppercase}
+.tools-footer{padding:24px 0;background:#050505}.tools-footer .shell{display:flex;justify-content:space-between;gap:18px;color:#787872;font:400 10px/1.5 var(--mono);letter-spacing:.08em;text-transform:uppercase}.tools-footer a:hover{color:var(--green)}
+@media(max-width:850px){.tools-hero__grid,.tool-card__body{grid-template-columns:1fr}.tools-hero__grid{gap:30px}.tool-card__body{min-height:0;gap:50px}.tools-header__label{display:none}}
+@media(max-width:560px){.tools-header__status{font-size:8px}.tools-hero h1{font-size:clamp(65px,20vw,98px)}.tool-card__topline,.tool-card__footer{padding:14px;font-size:8px}.tool-card__body{padding:35px 18px}.tool-card h2{font-size:clamp(76px,25vw,120px)}.tool-card__footer>span:first-child{max-width:185px}.tools-footer .shell{flex-direction:column;gap:7px}}
