@@ -248,7 +248,7 @@
 </head>
 <body>
   <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
-<header class="site-header" id="header"><div class="shell nav"><a href="/" class="brand" aria-label="POKE — página inicial"><img src="/assets/poke-logo-oficial.png" alt="POKE"></a><nav class="nav-links" id="menu" data-menu aria-label="Navegação principal"><a href="/" aria-current="page">Home</a><a href="/a-poke/">Sobre nós</a><a href="/solucoes/">Soluções</a><a href="/produtos/">Produtos</a><a href="/projetos/">Projetos</a><a href="/insights/">Insights</a><a href="/contato/">Contato</a></nav><a class="nav-cta" href="/contato/">Comece um projeto <span>↗</span></a><button class="menu-btn" type="button" data-menu-button aria-expanded="false" aria-controls="menu">MENU</button></div></header>
+<header class="site-header" id="header"><div class="shell nav"><a href="/" class="brand" aria-label="POKE — página inicial"><img src="/assets/poke-logo-oficial.png" alt="POKE"></a><nav class="nav-links" id="menu" data-menu aria-label="Navegação principal"><a href="/" aria-current="page">Home</a><a href="/a-poke/">Sobre nós</a><a href="/solucoes/">Soluções</a><a href="/produtos/">Produtos</a><a href="/insights/">Insights</a><a href="/contato/">Contato</a></nav><a class="nav-cta" href="/contato/">Comece um projeto <span>↗</span></a><button class="menu-btn" type="button" data-menu-button aria-expanded="false" aria-controls="menu">MENU</button></div></header>
 
 <main>
   <section class="hero" id="hero">
@@ -271,7 +271,7 @@
         <h1 class="reveal">We build <span>movement.</span></h1>
         <div class="hero-bottom reveal">
           <div class="hero-copy">Estratégia, design e tecnologia para transformar ideias, processos e problemas reais em soluções que funcionam.</div>
-          <div class="hero-actions"><a class="text-link" href="/projetos/">Ver projetos <span>↗</span></a><a class="text-link" href="/a-poke/">Conhecer a POKE <span>→</span></a></div>
+          <div class="hero-actions"><a class="text-link" href="/projetos/" hidden>Ver projetos <span>↗</span></a><a class="text-link" href="/a-poke/">Conhecer a POKE <span>→</span></a></div>
         </div>
       </div>
     </div>
@@ -345,7 +345,8 @@
     </div>
   </section>
 
-  <section class="projects" id="projetos">
+  <!-- Oculto até termos portfólio para mostrar: basta remover o atributo hidden. -->
+  <section class="projects" id="projetos" hidden>
     <div class="shell">
       <div class="section-title reveal"><div><span class="eyebrow">Projetos</span><h2>Coisas<br>funcionando.</h2></div><p>Projetos em que comunicação, experiência e tecnologia precisaram trabalhar juntas para resolver um problema de verdade.</p></div>
       <div class="home-bento reveal" aria-label="Seleção de projetos">
@@ -366,30 +367,7 @@
     </div>
   </section>
 
-  <section class="process">
-    <div class="shell">
-      <div class="process-head reveal"><span class="eyebrow">Processo</span><h2>Think.<br>Design.<br>Build.<br><span style="color:var(--green)">Move.</span></h2></div>
-      <div class="steps reveal">
-        <div class="step"><h3>Entender</h3><p>Negócio, pessoas, contexto, obstáculos e o que realmente precisa mudar.</p></div>
-        <div class="step"><h3>Questionar</h3><p>Removemos complexidade desnecessária e encontramos oportunidades no processo.</p></div>
-        <div class="step"><h3>Desenhar</h3><p>Transformamos estratégia em linguagem, experiência, interface e produto.</p></div>
-        <div class="step"><h3>Construir</h3><p>Tecnologia deixa de ser apresentação e vira uma solução utilizável no mundo real.</p></div>
-        <div class="step"><h3>Evoluir</h3><p>Medimos, aprendemos e seguimos melhorando. Produto bom não termina no lançamento.</p></div>
-      </div>
-    </div>
-  </section>
 
-  <section class="articles">
-    <div class="shell">
-      <div class="section-title reveal"><div><span class="eyebrow">Ideias</span><h2>Artigos &<br>insights.</h2></div><p>Conteúdo pensado também como ativo de descoberta orgânica: produto, comunicação, design, tecnologia e eficiência.</p></div>
-      <div class="article-gallery reveal">
-        <div class="article-gallery__intro"><span class="eyebrow">Últimos artigos</span><p>Passe pelas imagens para abrir uma prévia. Cada uma leva ao artigo completo.</p></div>
-        <div class="article-gallery__rail" data-cms-insights data-insights-limit="5" data-accordion-gallery data-accordion-default="2" aria-label="Cinco artigos mais recentes">
-          <a class="article-card" href="/insights/processo-ruim-planilha/"><div class="article-card__media"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1800&q=86" alt="" /></div><div class="article-card__content"><span class="article-card__category">Processos e tecnologia</span><h3>Por que todo processo ruim acaba virando uma planilha?</h3><p class="article-card__summary">Quando uma planilha passa a esconder uma operação, é hora de tornar o processo mais claro.</p><span class="article-card__link">Ler artigo ↗</span></div></a>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <section class="newsletter" id="newsletter" aria-labelledby="newsletter-titulo">
       <div class="shell newsletter__inner">
@@ -414,7 +392,7 @@
   </section>
 </main>
 
-<footer class="footer"><div class="shell"><div class="footer-top"><div class="footer-cols"><div class="footer-col"><h2>Navegação</h2><nav class="footer-nav"><a href="/">Home</a><a href="/a-poke/">Sobre nós</a><a href="/solucoes/">Soluções</a><a href="/produtos/">Produtos</a><a href="/projetos/">Projetos</a><a href="/insights/">Insights</a><a href="/contato/">Contato</a></nav></div><div class="footer-col"><h2>Soluções</h2><nav class="footer-nav"><a href="/solucoes/produtos-digitais/">Produtos digitais</a><a href="/solucoes/sites/">Sites e experiências</a><a href="/solucoes/sistemas-automacoes/">Sistemas e automações</a><a href="/solucoes/branding/">Marca e identidade</a><a href="/solucoes/comunicacao/">Comunicação</a></nav></div><div class="footer-col"><h2>Contato</h2><nav class="footer-nav"><a href="mailto:contato@pokecomunicacao.com.br">contato@pokecomunicacao.com.br</a><a href="/contato/" data-whatsapp-link hidden>WhatsApp</a><a href="https://instagram.com/" target="_blank" rel="noopener">Instagram ↗</a><a href="https://linkedin.com/" target="_blank" rel="noopener">LinkedIn ↗</a></nav><p>Curitiba — PR / Brasil</p></div></div><div class="footer-mark"><img src="/assets/poke-p-oficial.png" alt="POKE" width="2048" height="2048" loading="lazy"></div></div><div class="footer-bottom"><span>POKE © 2026</span><span>We build movement.</span><a href="/privacidade/">Privacidade</a></div></div></footer>
+<footer class="footer"><div class="shell"><div class="footer-top"><div class="footer-cols"><div class="footer-col"><h2>Navegação</h2><nav class="footer-nav"><a href="/">Home</a><a href="/a-poke/">Sobre nós</a><a href="/solucoes/">Soluções</a><a href="/produtos/">Produtos</a><a href="/insights/">Insights</a><a href="/contato/">Contato</a></nav></div><div class="footer-col"><h2>Soluções</h2><nav class="footer-nav"><a href="/solucoes/produtos-digitais/">Produtos digitais</a><a href="/solucoes/sites/">Sites e experiências</a><a href="/solucoes/sistemas-automacoes/">Sistemas e automações</a><a href="/solucoes/branding/">Marca e identidade</a><a href="/solucoes/comunicacao/">Comunicação</a></nav></div><div class="footer-col"><h2>Contato</h2><nav class="footer-nav"><a href="mailto:contato@pokecomunicacao.com.br">contato@pokecomunicacao.com.br</a><a href="/contato/" data-whatsapp-link hidden>WhatsApp</a><a href="https://instagram.com/" target="_blank" rel="noopener">Instagram ↗</a><a href="https://linkedin.com/" target="_blank" rel="noopener">LinkedIn ↗</a></nav><p>Curitiba — PR / Brasil</p></div></div><div class="footer-mark"><img src="/assets/poke-p-oficial.png" alt="POKE" width="2048" height="2048" loading="lazy"></div></div><div class="footer-bottom"><span>POKE © 2026</span><span>We build movement.</span><a href="/privacidade/">Privacidade</a></div></div></footer>
 
 <script>
   const header=document.getElementById('header');
