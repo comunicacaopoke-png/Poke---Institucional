@@ -101,10 +101,13 @@
     submit.disabled = true;
     submit.textContent = 'ENVIANDO…';
     setStatus('');
+    // Sem limite, uma requisição parada deixava o botão em "ENVIANDO…" para sempre.
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 20000);
     try {
       const response = await fetch(url, {
         method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload), signal: controller.signal
       });
       if (!response.ok) throw new Error('Falha ao enviar');
       form.reset();
@@ -115,6 +118,7 @@
     } catch (error) {
       setStatus('Não foi possível enviar agora. Tente de novo ou escreva para contato@pokecomunicacao.com.br.', true);
     } finally {
+      window.clearTimeout(timeout);
       submit.disabled = false;
       submit.innerHTML = submitLabel;
     }
