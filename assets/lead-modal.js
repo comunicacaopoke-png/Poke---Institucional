@@ -105,11 +105,12 @@
     const controller = new AbortController();
     const timeout = window.setTimeout(() => controller.abort(), 20000);
     try {
-      const response = await fetch(url, {
-        method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      // no-cors: o Apps Script responde por um redirecionamento que alguns navegadores
+      // bloqueiam por CORS. A entrega acontece do mesmo jeito; só não lemos a resposta.
+      await fetch(url, {
+        method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify(payload), signal: controller.signal
       });
-      if (!response.ok) throw new Error('Falha ao enviar');
       form.reset();
       form.hidden = true;
       done.hidden = false;

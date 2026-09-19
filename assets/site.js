@@ -337,11 +337,12 @@
       submit.disabled = true;
       submit.textContent = 'ENVIANDO…';
       try {
-        const response = await fetch(endpoint, {
-          method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        // no-cors: o Apps Script responde por um redirecionamento que alguns navegadores
+        // bloqueiam por CORS. A entrega acontece do mesmo jeito; só não lemos a resposta.
+        await fetch(endpoint, {
+          method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
           body: JSON.stringify(payload)
         });
-        if (!response.ok) throw new Error('Falha ao enviar');
         status.textContent = 'Recebemos sua mensagem. A gente continua daqui.';
         contactForm.reset();
         window.pokeTrack('generate_lead', { form_name: 'contato' });
@@ -377,8 +378,10 @@
       submit.disabled = true;
       submit.textContent = 'ENVIANDO…';
       try {
-        const response = await fetch(endpoint, {
-          method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        // no-cors: o Apps Script responde por um redirecionamento que alguns navegadores
+        // bloqueiam por CORS. A entrega acontece do mesmo jeito; só não lemos a resposta.
+        await fetch(endpoint, {
+          method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
           body: JSON.stringify({
             tipo: 'newsletter',
             email: newsletterForm.email.value.trim(),
@@ -386,7 +389,6 @@
             submitted_at: new Date().toISOString()
           })
         });
-        if (!response.ok) throw new Error('Falha ao inscrever');
         setStatus('Pronto. Você entrou na lista.', false);
         newsletterForm.reset();
         window.pokeTrack('sign_up', { method: 'newsletter' });
